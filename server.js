@@ -46,14 +46,14 @@ wsServer.on("request", request => {
     };
 
     if (result.method === "join") {
-      const clientId = result.clientId
-      const gameId = response.gameId;
+      const clientId = result.clientId;
+      const gameId = result.gameId;
       const game = games[gameId];
-
-      if (game.clients.length >= 4) {
-        // max reached
-        return;
-      }
+      
+        if (game.clients.length >= 4) {
+          // max reached
+          return;
+        }
 
       const color = {"0": "Red", "1": "Blue", "2": "Green", "3": "Yellow"}[game.clients.length]
       game.clients.push({
