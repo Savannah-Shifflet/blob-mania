@@ -21,7 +21,7 @@
       gameId = txtGameId.value;
     }
     const payLoad = {
-      "method": "connect",
+      "method": "join",
       "clientId": clientId,
       "gameId": gameId,
     };
@@ -60,8 +60,8 @@
       while(divPlayers.firstChild) 
         divplayers.removeChild(divPlayers.firstChild);
       
-      game.clients.forEach (c => {
-        const d = document.createElement("div");
+      game.clients.forEach(c => {
+        var d = document.createElement("div");
         d.style.width = "200px";
         d.style.background = c.color;
         d.textContent = c.clientId;
