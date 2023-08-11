@@ -4,9 +4,10 @@
 <div id="divPlayers"></div>
 
 <script>
+  const helpers = require('./utils/helpers');
   // HTML elements
-  let clientId = null;
-  let gameId = null;
+  let clientId = undefined;
+  let gameId = undefined;
 
   let ws = new WebSocket("ws://localhost:3002");
   const btnCreate = document.getElementById("btnCreate");
@@ -60,13 +61,14 @@
       while(divPlayers.firstChild) 
         divplayers.removeChild(divPlayers.firstChild);
       
-      game.clients.forEach(c => {
+      gameClientsForeach();
+    };
+  };
+</script>
+{{!--       game.clients.forEach(c => {
         var d = document.createElement("div");
         d.style.width = "200px";
         d.style.background = c.color;
         d.textContent = c.clientId;
         divPlayers.appendChild(d);
-      })
-    };
-  };
-</script>
+      }) --}}
