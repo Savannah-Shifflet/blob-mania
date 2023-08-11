@@ -17,7 +17,7 @@
   // wiring events
   btnJoin.addEventListener("click", e => {
     
-    if (gameId === null) {
+    if (gameId === undefined) {
       gameId = txtGameId.value;
     }
     const payLoad = {
