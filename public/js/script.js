@@ -95,9 +95,9 @@ canvas.addEventListener('mouseup', function(event) {
 });
 
 const playerLeft = new Image();
-playerLeft.src = 'images/blob1.png';
+playerLeft.src = 'images/blob1b.png';
 const playerRight = new Image();
-playerRight.src = 'images/blob2.png';
+playerRight.src = 'images/blob1.png';
 
 
 // players 
@@ -136,18 +136,28 @@ class Player {
       ctx.lineTo(mouse.x, mouse.y);
       ctx.stroke();
     };
-    ctx.fillStyle = 'red';
+    // ctx.fillStyle = 'red';
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI *2);
-    ctx.fill();
+    // ctx.fill();
     ctx.closePath();
-    ctx.fillRect(this.x, this.y, this.radius,10);
-
-    ctx.drawImage(playerLeft, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth/4, this.spriteHeight/4);
+    // ctx.fillRect(this.x, this.y, this.radius,10);
+    
+    if (this.x >= mouse.x){
+      ctx.drawImage(playerLeft, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, 
+      this.spriteWidth, this.spriteHeight, this.x - 50, this.y - 50, this.spriteWidth/3, this.spriteHeight/3);
+    } else {
+      ctx.drawImage(playerRight, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, 
+      this.spriteWidth, this.spriteHeight, this.x - 50, this.y - 50, this.spriteWidth/3, this.spriteHeight/3);
+    }
+    // If we change spriteWidth/spriteHeight we need to change this.x - 50 and this.y - 50, so the image would be centered
   };
 };
 
 // bubbles
+const ball1 = new Image();
+ball1.src = 'images/blob-ball1.png';
+
 var bubblesArray = []
 class Bubble {
   constructor() {
@@ -172,12 +182,14 @@ class Bubble {
   };
   
   draw() {
-    ctx.fillStyle = 'blue';
+    // ctx.fillStyle = 'blue';
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI *2);
-    ctx.fill();
+    // ctx.fill();
     ctx.closePath();
-    ctx.stroke(); 
+    // ctx.stroke();
+    
+    ctx.drawImage(ball1, this.x - this.radius, this.y - this.radius, this.radius * 1., this.radius * 1);
   };
 };
 
@@ -204,10 +216,10 @@ function handleBubbles() {
     if (bubblesArray[i].distance < bubblesArray[i].radius + player.radius) {
       if (!bubblesArray[i].counted){
         if (bubblesArray[i].sound == 'sound1'){
-          // fix the sound volume
-          // bubblePop1.volume = 0.2;
-          bubblePop1.cloneNode(true).play();
-        };
+          const clonedSound = bubblePop1.cloneNode(true);
+          clonedSound.volume = 0.2;
+          clonedSound.play();
+        }
         score++;
         bubblesArray[i].counted = true;
         // If we hit a bubble it's going to be removed
