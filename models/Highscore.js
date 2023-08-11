@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Highscore extends Model {};
+class HighScore extends Model {}
 
-Highscore.init(
+HighScore.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -27,8 +27,8 @@ Highscore.init(
         sequelize,
         timestamps: false,
         freezeTableName: true,
-        modelName: 'highscore'
+        modelName: 'highScore'
     }
 );
 
-model.exports = Highscore; 
+module.exports = HighScore; 
