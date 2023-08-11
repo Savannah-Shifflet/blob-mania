@@ -16,6 +16,7 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'assets')));
 
 app.use(routes);
 
@@ -86,6 +87,14 @@ wsServer.on("request", request => {
         clients[c.clientId].connection.send(JSON.stringify(payLoad))
       })
     };
+
+    // a user plays
+    // if (result.method === "play") {
+    //   const clientId = result.clientId
+    //   const gameId = result.gameId
+
+    //   const state = games[gameId].state
+    // };
   });
 
   // generate a new clientId
