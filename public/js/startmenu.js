@@ -6,11 +6,12 @@ const btnCreate = document.getElementById("btnCreate");
 const btnJoin = document.getElementById("btnJoin");
 const txtGameId = document.getElementById("txtGameId");
 const divPlayers = document.getElementById("divPlayers");
+const newGameEl = document.getElementById("newGameEl");
 
 // wiring events
 btnJoin.addEventListener("click", e => {
 
-    if (gameId == undefined) {
+    if (gameId === undefined) {
     gameId = txtGameId.value;
 }
 const payLoad = {
@@ -44,6 +45,9 @@ if (response.method === "connect") {
 if (response.method === "create") {
     gameId = response.game.Id;
     console.log("game successfully created with id: " + response.game.id + " with " + response.game.balls + " balls");
+    var newGame = document.createElement("p");
+    newGame.textContent = ("New game ID: " + response.game.id);
+    newGameEl.appendChild(newGame); 
 };
 
   // join
@@ -55,8 +59,7 @@ if (response.method === "join") {
 
     game.clients.forEach(c => {
     var d = document.createElement("div");
-    d.style.width = "200px";
-    d.style.background = c.color;
+    d.setAttribute("class", "add_player")
     d.textContent = c.clientId;
     divPlayers.appendChild(d);
 })
