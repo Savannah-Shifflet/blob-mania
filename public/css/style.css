@@ -1,6 +1,24 @@
 body{
     background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%);
 }
+
+.login{
+    background-color: rgb(196, 4, 143, 0.8);
+    color: white;
+    font-family: 'VT323', monospace;
+}
+
+#btnCreate,
+#btnJoin{
+    background-image: linear-gradient(to bottom right, #8756a4,#6c68af, #5975b9);
+    color: white;
+    font-family: 'VT323', monospace;
+    font-size: 32px;
+}
+
+#txtGameId{
+    background-color: rgb(196, 4, 143, 0.7);
+}
 #start-menu{
     border: 0.2rem solid #fff;
     border-radius: 2rem;
@@ -11,11 +29,12 @@ body{
                 0 0 0.8rem #bc13fe,
                 0 0 1.8rem #bc13fe,
                 inset 0 0 1rem #bc13fe; 
+    max-width: 800px;
 }
 
 
 #neon-text {
-    font-size: 4rem;
+    font-size: 72px;
     font-family: 'Tilt Neon', cursive;
     animation: flicker 1.5s infinite alternate;   
     color: #fff;
