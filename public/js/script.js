@@ -29,7 +29,8 @@ const playerLeft = new Image();
 playerLeft.src = 'images/blob1b.png';
 const playerRight = new Image();
 playerRight.src = 'images/blob1.png';
-
+var background = new Image();
+background.src = "images/background1.png";
 
 // players 
 class Player {
@@ -165,6 +166,7 @@ const player = new Player();
 // animation loop
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(background,0,0);   
   handleBubbles();
   player.update();
   player.draw();
