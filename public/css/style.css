@@ -1,5 +1,26 @@
-body{
-    background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%);
+}
+
+.container {
+  margin-top: 100px;
+  max-width: fit-content;
+}
+
+#canvas1 {
+  width: 800px;
+  height: 500px;
+  border: 4px solid black;
 }
 
 .login{
@@ -69,3 +90,4 @@ body{
         text-shadow: none;
     }    
 }
+
