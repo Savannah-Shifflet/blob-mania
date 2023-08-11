@@ -88,7 +88,7 @@ wsServer.on("request", request => {
       })
     };
 
-    // a user plays
+    // PLAY STATE UPDATE SERVER 
     // if (result.method === "play") {
     //   const clientId = result.clientId
     //   const gameId = result.gameId
@@ -117,8 +117,4 @@ const guid = () => {
   return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4() + s4() + s4()}`;
 }
 
-
-// sequelize.sync({ force: false }).then(() => {
-//   app.listen(PORT, () => console.log('Now listening'));
-// });
 app.listen(PORT, () => console.log('Now listening'));
