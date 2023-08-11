@@ -1,3 +1,4 @@
 const User = require('./User');
+const Highscore = require('./Highscore')
 
-module.exports = { User };
+module.exports = { User, Highscore };
