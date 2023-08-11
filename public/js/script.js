@@ -112,7 +112,7 @@ class Player {
     this.frame = 0;
     this.spriteWidth = 300;
     this.spriteHeight = 300;
-  }
+  };
 
   update() {
     const dx = this.x - mouse.x;
@@ -120,7 +120,7 @@ class Player {
     if (mouse.x != this.x) {
       // speed of player movement
       this.x -= dx/30;
-    }
+    };
     if (mouse.y != this.y) {
       // speed of movement
       this.y -= dy/30;
@@ -162,7 +162,7 @@ class Bubble {
     // Adding a sound to bubbles(also randomizing them between 2)
     // this.sound = Math.random() <= 0.5 ? 'sound1' : 'sound2';
     this.sound = 'sound1';
-  }
+  };
 
   update() {
     this.y -= this.speed
@@ -194,27 +194,28 @@ function handleBubbles() {
   for (let i = 0; i < bubblesArray.length; i++) {
     bubblesArray[i].update();
     bubblesArray[i].draw();
-  }
+  };
 
   for (let i = 0; i < bubblesArray.length; i++) {
     if (bubblesArray[i].y < 0 - bubblesArray[i].radius *2) {
       bubblesArray.splice(i, 1);
-    }
+    };
+
     if (bubblesArray[i].distance < bubblesArray[i].radius + player.radius) {
       if (!bubblesArray[i].counted){
         if (bubblesArray[i].sound == 'sound1'){
+          // fix the sound volume
+          // bubblePop1.volume = 0.2;
           bubblePop1.cloneNode(true).play();
-          bubblePop1.volume = 0.2;
-        }
+        };
         score++;
         bubblesArray[i].counted = true;
         // If we hit a bubble it's going to be removed
         bubblesArray.splice(i, 1);
-      }
-    }
-  }
-  
-}
+      };
+    };
+  };
+};
 
 const player = new Player();
 

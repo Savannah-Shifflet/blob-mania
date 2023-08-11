@@ -31,10 +31,15 @@ body {
 
 #btnCreate,
 #btnJoin{
+    transition: all .2s ease-in-out; 
     background-image: linear-gradient(to bottom right, #8756a4,#6c68af, #5975b9);
     color: white;
     font-family: 'VT323', monospace;
     font-size: 32px;
+}
+
+#btnCreate:hover, #btnJoin:hover{
+  transform: scale(1.2);
 }
 
 #txtGameId{
