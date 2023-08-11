@@ -10,3 +10,14 @@ router.post('/', async (req, res) => {
         res.status(400).json(err);
     }
 });
+
+router.get('/:id', async (req, res) => {
+    try{
+        const highscoreData = Highscore.findAll({
+            where: {user_id: req.params.id}
+        });
+        res.status(200).json(highscoreData);
+    }catch(err) {
+        res.status(400).json(err);
+    }
+});
