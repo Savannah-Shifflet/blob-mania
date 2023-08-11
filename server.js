@@ -5,11 +5,26 @@ const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
 
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+const hbs = exphbs.create({ helpers });
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(routes);
+
 //initialize server requirements
 const http = require("http");
 const websocketServer = require("websocket").server;
 const httpServer = http.createServer();
-httpServer.listen(3002, () => console.log("listening... on 3002"))
+httpServer.listen(3002, () => console.log("listening... on 3001"))
+
 
 // hashmap
 const clients = {};
@@ -49,13 +64,13 @@ wsServer.on("request", request => {
       const clientId = result.clientId;
       const gameId = result.gameId;
       const game = games[gameId];
-      
-        if (game.clients.length >= 4) {
-          // max reached
-          return;
-        }
 
-      const color = {"0": "Red", "1": "Blue", "2": "Green", "3": "Yellow"}[game.clients.length]
+      if (game.clients.length >= 4) {
+        // max reached
+        return;
+      }
+
+      const color = { "0": "Red", "1": "Blue", "2": "Green", "3": "Yellow" }[game.clients.length]
       game.clients.push({
         "clientId": clientId,
         "color": color,
@@ -71,7 +86,7 @@ wsServer.on("request", request => {
         clients[c.clientId].connection.send(JSON.stringify(payLoad))
       })
     };
-  }); 
+  });
 
   // generate a new clientId
   const clientId = guid();
@@ -83,28 +98,16 @@ wsServer.on("request", request => {
     "method": "connect",
     "clientId": clientId,
   }
+
   // send back the client connect
   connection.send(JSON.stringify(payLoad));
 });
 
 const guid = () => {
-  const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);     
+  const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
   return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4() + s4() + s4()}`;
 }
 
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-const hbs = exphbs.create({ helpers });
-
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(routes);
 
 // sequelize.sync({ force: false }).then(() => {
 //   app.listen(PORT, () => console.log('Now listening'));
