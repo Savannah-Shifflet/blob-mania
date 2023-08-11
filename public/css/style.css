@@ -96,3 +96,15 @@ body {
     }    
 }
 
+#chat-box {
+  border: 0.2rem solid #fff;
+  border-radius: 2rem;
+  padding: 0.4em;
+  box-shadow: 0 0 .2rem #fff,
+              0 0 .2rem #fff,
+              0 0 0.5rem #bc13fe,
+              0 0 0.8rem #bc13fe,
+              0 0 1.8rem #bc13fe,
+              inset 0 0 1rem #bc13fe; 
+  max-width: 800px;
+}
