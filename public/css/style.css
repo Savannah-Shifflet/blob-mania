@@ -1,7 +1,3 @@
-* {
-  transition: all .2s ease-in-out; 
-}
-
 body {
   background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%);
 }
@@ -52,6 +48,8 @@ body {
 #btnCreate,
 #btnJoin,
 #send-btn{
+    transition: all .2s ease-in-out; 
+    display: flex;
     margin: auto auto;
     background-image: linear-gradient(to bottom right, #8756a4,#6c68af, #5975b9);
     color: white;
@@ -61,6 +59,7 @@ body {
 
 #messages,
 #newGameEl p{
+  max-height: 200px;
   color:white; 
   margin-top: 10px; 
 }

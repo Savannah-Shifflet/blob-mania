@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     // Pass serialized data into Handlebars.js template
     // res.render('gameplay', { users });
     
-    res.render('startmenu');
+    res.render('startmenu',);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -24,6 +24,14 @@ router.get('/', async (req, res) => {
 router.get('/play', async (req, res) => {
   try {
     res.render('gameplay', );
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/profile', async (req, res) => {
+  try {
+    res.render('profile', );
   } catch (err) {
     res.status(500).json(err);
   }
