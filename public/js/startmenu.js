@@ -46,6 +46,9 @@ if (response.method === "create") {
     gameId = response.game.Id;
     console.log("game successfully created with id: " + response.game.id + " with " + response.game.balls + " balls");
     var newGame = document.createElement("p");
+    while (newGameEl.childNodes.length > 2) {
+      newGameEl.removeChild(newGameEl.lastChild);
+    }
     newGame.textContent = ("New game ID: " + response.game.id);
     newGameEl.appendChild(newGame); 
 };

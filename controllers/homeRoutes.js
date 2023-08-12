@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
 
 router.get('/play', async (req, res) => {
   try {
-    res.render('gameplay');
+    res.render('gameplay', );
   } catch (err) {
     res.status(500).json(err);
   }
