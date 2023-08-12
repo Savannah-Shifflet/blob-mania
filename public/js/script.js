@@ -184,6 +184,7 @@ animate();
 const messages = document.getElementById("messages");
 const userInput = document.getElementById("user-input");
 const sendBtn = document.getElementById("send-btn");
+const ws = new WebSocket('ws://localhost:3002');
 
 showMessage = (message) => {
   messages.textContent += `\n\n${message}`;
@@ -197,7 +198,6 @@ init = () => {
       ws.close();
   }
 
-  ws = new WebSocket('ws://localhost:3002');
   ws.onopen = () => {
       console.log('Chat connected!');
   }
