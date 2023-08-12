@@ -1,3 +1,7 @@
+* {
+  transition: all .2s ease-in-out; 
+}
+
 body {
   background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%);
 }
@@ -47,7 +51,7 @@ body {
 
 #btnCreate,
 #btnJoin{
-    transition: all .2s ease-in-out; 
+    margin: auto auto;
     background-image: linear-gradient(to bottom right, #8756a4,#6c68af, #5975b9);
     color: white;
     font-family: 'VT323', monospace;
@@ -61,10 +65,8 @@ body {
 
 #btnCreate:hover, 
 #btnJoin:hover{
-  transform: scale(1.1);
   border: 0.2rem solid #fff;
   border-radius: 2rem;
-  padding: 0.4em;
   box-shadow: 0 0 .2rem #fff,
               0 0 .2rem #fff,
               0 0 0.5rem #bc13fe,

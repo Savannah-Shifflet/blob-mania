@@ -1,24 +1,26 @@
-<div class = "container mt-5 w-75 h-auto align-items-center justify-content-center" >
-    <div id="start-menu">
-        <div class = "row m-2 align-items-center justify-content-center text-center">
-            <div class = "col-10 m-2" id = "newGameEl">
-                <button class="btn w-100" id="btnCreate">New Game</button>
+<div class="container mt-5 w-100 h-auto align-items-center justify-content-center">
+    <div class="row">
+        <div id="start-menu" class="col-8">
+            <div class="row m-2 align-items-center justify-content-center text-center">
+                <div class="col-10 m-2" id="newGameEl">
+                    <button class="btn w-100" id="btnCreate">New Game</button>
+                </div>
+            </div>
+            <div class="row m-2 align-items-center justify-content-center">
+                <div class="col-md-4 col-sm-8 m-2 middle">
+                    <button class="btn w-100" id="btnJoin">Join Game</button>
+                </div>
+                <div class="col-md-6 col-sm-8 m-2">
+                    <input type="text" class="w-100" id="txtGameId">
+                </div>
             </div>
         </div>
-        <div class = "row m-2 align-items-center justify-content-center">
-            <div class = "col-md-4 col-sm-8 m-2 middle">
-                <button class="btn w-100" id="btnJoin">Join Game</button>
-            </div>
-            <div class = "col-md-6 col-sm-8 m-2">
-                <input type="text" class = "w-100" id="txtGameId">
-            </div>
+        <div class="container mt-3 align-items-center text-center col-4">
+            {{!-- TODO add if for when one person joins to show joined players --}}
+            <h2 id="join_players">Players joined!</h2>
+            <div id="divPlayers"></div>
         </div>
     </div>
-    <div class = "row mt-3 align-items-center text-center">
-        {{!-- TODO add if for when one person joins to show joined players --}}
-        <h2 id = "join_players">Players joined!</h2>
-        <div id="divPlayers"></div>
-    </div>
-</div>   
+</div>
 
 <script src="/js/startmenu.js"></script>
