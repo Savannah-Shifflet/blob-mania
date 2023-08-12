@@ -1,11 +1,12 @@
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
-canvas.width = 800;
-canvas.height = 500;
+canvas.width = 850;
+canvas.height = 550;
 
 let score = 0;
 let gameFrame = 0;
-ctx.font = '50px Georgia';
+ctx.font = '35px VT323';
+ctx.fillStyle = 'white';
 
 // mouse interactivity
 let canvasPosition = canvas.getBoundingClientRect();
@@ -96,7 +97,7 @@ class Bubble {
     this.x = Math.random() * canvas.width;
     this.y = canvas.height + 100;
     this.radius = 50;
-    this.speed = Math.random() * 5 + 1;
+    this.speed = Math.random() * 4 + 1;
     this.counted = false;
     this.distance;
     // So each bubble would give just 1 point
