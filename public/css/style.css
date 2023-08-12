@@ -50,7 +50,8 @@ body {
 }
 
 #btnCreate,
-#btnJoin{
+#btnJoin,
+#send-btn{
     margin: auto auto;
     background-image: linear-gradient(to bottom right, #8756a4,#6c68af, #5975b9);
     color: white;
@@ -58,6 +59,7 @@ body {
     font-size: 32px;
 }
 
+#messages,
 #newGameEl p{
   color:white; 
   margin-top: 10px; 
