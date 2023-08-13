@@ -20,7 +20,16 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
+// Login
+router.get('/login', async (req, res) => {
+  try {
+    res.render('login', );
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
+// Go to profile
 router.get('/profile', async (req, res) => {
   try {
     res.render('profile', );
