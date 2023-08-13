@@ -1,4 +1,7 @@
 const canvas = document.getElementById('canvas1');
+const chatBoxEl = document.getElementById('chat-box');
+const startMenuEl = document.getElementById('start-menu');
+const playButtonEl = document.getElementById('play-button');
 const ctx = canvas.getContext('2d');
 canvas.width = 850;
 canvas.height = 550;
@@ -7,6 +10,16 @@ let score = 0;
 let gameFrame = 0;
 ctx.font = '35px VT323';
 ctx.fillStyle = 'white';
+
+playButtonEl.addEventListener("click", e => {
+  canvas.style.display = 'inline';
+  chatBoxEl.style.display = 'block';
+  startMenuEl.style.display = 'none';
+  playButtonEl.style.display = 'none';
+  // canvas = document.createElement('div');
+  // canvas.setAttribute("id", "Div1");
+  animate()
+})
 
 // mouse interactivity
 let canvasPosition = canvas.getBoundingClientRect();
@@ -176,46 +189,3 @@ function animate() {
   gameFrame ++;
   requestAnimationFrame(animate);
 }
-
-animate();
-
-// ======================================================================================= GAMEPLAY ^^
-
-// ======================================================================================= CHATBOX vv
-
-const messages = document.getElementById("messages");
-const userInput = document.getElementById("user-input");
-const sendBtn = document.getElementById("send-btn");
-const ws = new WebSocket('ws://localhost:3002');
-
-showMessage = (message) => {
-  messages.textContent += `\n\n${message}`;
-  messages.scrollTop = messages.scrollHeight;
-  userInput.value = '';
-}
-
-init = () => {
-  if (ws) {
-      ws.onerror = ws.onopen = ws.onclose = null;
-      ws.close();
-  }
-
-  ws.onopen = () => {
-      console.log('Chat connected!');
-  }
-  ws.onmessage = ({ data }) => showMessage(data);
-  ws.onclose = function() {
-      ws = null;
-  }
-}
-
-sendBtn.onclick = () => {
-  if (!ws) {
-      showMessage('No WebSocket connection');
-      return;
-  }
-  ws.send(userInput.value);
-  showMessage(userInput.value);
-}
-
-init();
