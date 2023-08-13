@@ -33,6 +33,7 @@ body {
 }
 
 #canvas1 {
+  display: none;
   width: 850px;
   height: 550px;
   border: 0.2rem solid #fff;
@@ -144,6 +145,7 @@ body {
 }
 
 #chat-box {
+  display: none;
   border: 0.2rem solid #fff;
   border-radius: 2rem;
   padding: 0.4em;
