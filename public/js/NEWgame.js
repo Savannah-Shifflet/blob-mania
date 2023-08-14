@@ -4,7 +4,6 @@ const c = canvas.getContext('2d')
 const socket = io()
 
 const scoreEl = document.querySelector('#scoreEl')
-
 // const devicePixelRatio = window.devicePixelRatio || 1
 
 // canvas.width = innerWidth * devicePixelRatio;
@@ -89,7 +88,7 @@ socket.on('updatePlayers', (backendPlayers) => {
   }
   // Deleting a player from frontend
   for (const id in frontEndPlayers) {
-    if (!backEndPlayers[id]) {
+    if (!backendPlayers[id]) {
       delete frontEndPlayers[id]
     }
   }
@@ -111,7 +110,11 @@ function animate() {
     const frontEndProjectile = frontEndProjectiles[id]
     frontEndProjectile.draw()
   }
-
+  // Flipping a sprite
+  for (const id in frontEndPlayers) {
+    const player = frontEndPlayers[id];
+    player.draw();
+  }
   // for (let i = frontEndProjectiles.length - 1; i >= 0; i--) {
   // const projectile = frontEndProjectiles[i];
   // projectile.update();
@@ -171,6 +174,7 @@ window.addEventListener("keydown", (event) => {
 
     case 'KeyA':
       keys.a.pressed = true;
+      frontEndPlayers[socket.id].a = true;
       break
 
     case 'KeyS':
@@ -179,6 +183,7 @@ window.addEventListener("keydown", (event) => {
 
     case 'KeyD':
       keys.d.pressed = true;
+      frontEndPlayers[socket.id].d = true;
       break
   }
 });
@@ -193,6 +198,8 @@ window.addEventListener('keyup', (event) => {
 
     case 'KeyA':
       keys.a.pressed = false;
+      frontEndPlayers[socket.id].a = true;
+      frontEndPlayers[socket.id].d = false;
       break
 
     case 'KeyS':
@@ -201,6 +208,8 @@ window.addEventListener('keyup', (event) => {
 
     case 'KeyD':
       keys.d.pressed = false;
+      frontEndPlayers[socket.id].a = false;
+      frontEndPlayers[socket.id].d = true;
       break
   }
 });
