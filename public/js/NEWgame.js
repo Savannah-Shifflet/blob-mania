@@ -5,10 +5,12 @@ const socket = io()
 
 const scoreEl = document.querySelector('#scoreEl')
 
-const devicePixelRatio = window.devicePixelRatio || 1
+// const devicePixelRatio = window.devicePixelRatio || 1
 
-canvas.width = innerWidth * devicePixelRatio;
-canvas.height = innerHeight * devicePixelRatio;
+// canvas.width = innerWidth * devicePixelRatio;
+// canvas.height = innerHeight * devicePixelRatio;
+canvas.width = 1200;
+canvas.height = 750;
 
 const x = canvas.width / 2;
 const y = canvas.height / 2;
