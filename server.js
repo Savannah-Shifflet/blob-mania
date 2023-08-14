@@ -52,8 +52,9 @@ const backEndPlayers = {};
 const backEndProjectiles = {};
 
 let projectileId = 0;
-
+const PROJECTILE_RADIUS = 5;
 const playerSpeed = 10;
+const playerRadius = 10;
 
 io.on('connection', (socket) => {
     console.log('A user connected');
@@ -66,10 +67,15 @@ io.on('connection', (socket) => {
 
     io.emit('updatePlayers', backEndPlayers)
 
-    socket.on('initCanvas', ({width, height}) => {
+    socket.on('initCanvas', ({ width, height, devicePixelRatio }) => {
         backEndPlayers[socket.id].canvas = {
             width,
             height
+        }
+
+        backEndPlayers[socket.id].radius = playerRadius
+        if (devicePixelRatio > 1) {
+            backEndPlayers[socket.id].radius = 2 * playerRadius
         }
     })
 
@@ -127,14 +133,29 @@ setInterval(() => {
         backEndProjectiles[id].y += backEndProjectiles[id].velocity.y
 
         const PROJECTILE_RADIUS = 5
-        if (backEndProjectiles[id].x - PROJECTILE_RADIUS >= 
-            backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.width || 
+        if (backEndProjectiles[id].x - PROJECTILE_RADIUS >=
+            backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.width ||
             backEndProjectiles[id].x + PROJECTILE_RADIUS <= 0 ||
-            backEndProjectiles[id].y - PROJECTILE_RADIUS >= 
-            backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.width || 
+            backEndProjectiles[id].y - PROJECTILE_RADIUS >=
+            backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.width ||
             backEndProjectiles[id].y + PROJECTILE_RADIUS <= 0
-            ) {
+        ) {
             delete backEndProjectiles[id]
+        continue;
+        }
+        for (const playerId in backEndPlayers) {
+            const backEndPlayer = backEndPlayers[playerId]
+
+            const DISTANCE = Math.hypot(
+                backEndProjectiles[id].x - backEndPlayer.x,
+                backEndProjectiles[id].y - backEndPlayer.y
+            )
+            if (DISTANCE < PROJECTILE_RADIUS + backEndPlayer.radius && backEndProjectiles[id].playerId !== playerId) {
+                delete backEndProjectiles[id]
+                delete backEndPlayers[playerId]
+                break;
+            }
+                console.log(DISTANCE)
         }
     }
 
