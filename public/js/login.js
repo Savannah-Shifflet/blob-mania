@@ -1,21 +1,25 @@
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
-  const username = document.querySelector('#loginUser').value.trim();
+  const email = document.querySelector('#loginUser').value.trim();
   const password = document.querySelector('#loginPassword').value.trim();
 
-  if (username && password) {
+  if (email && password) {
     const response = await fetch('/api/users/login', {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
       // Redirect to profile??? or main page???
       document.location.replace('/');
+    } else if(response.status = 400) {
+      const loginError = document.getElementById('loginError');
+      loginError.textContent = "Incorrect email or password!"
+      loginError.setAttribute('style', 'color: red'); 
     } else {
-      alert(response.statusText);
+      alert(response.message);
     }
   }
 };
