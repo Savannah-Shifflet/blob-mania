@@ -1,12 +1,12 @@
 const path = require('path');
 const express = require('express');
 const http = require('http'); 
-// const session = require('express-session');
+const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 const server = http.createServer(app); 
@@ -14,6 +14,23 @@ const { Server } = require('socket.io')
 const io = new Server(server, { pingInterval: 2000, pingTimeout: 5000 })
 
 const PORT = process.env.PORT || 3001;
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {
+    maxAge: 300000,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
+
+app.use(session(sess));
+
 const hbs = exphbs.create({ helpers });
 
 app.engine('handlebars', hbs.engine);
@@ -26,23 +43,10 @@ app.use(express.static(path.join(__dirname, 'assets')));
 
 app.use(routes);
 
-// Not working at the moment
-// const sess = {
-//   secret: 'Super secret secret',
-//   cookie: {
-//     maxAge: 300000,
-//     httpOnly: true,
-//     secure: false,
-//     sameSite: 'strict',
-//   },
-//   resave: false,
-//   saveUninitialized: true,
-//   store: new SequelizeStore({
-//     db: sequelize
-//   })
-// };
+sequelize.sync({ force:false }).then(() => {
+  server.listen(PORT, () => console.log(`Now listening on ${PORT}`));
+});
 
-// app.use(session(sess));
 const players = {
 
 }
@@ -67,4 +71,4 @@ io.on('connection', (socket) => {
   console.log(players)
 });
 
-server.listen(PORT, () => console.log(`Now listening on ${PORT}`));
+
