@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const http = require('http'); 
+const http = require('http');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
@@ -9,24 +9,24 @@ const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
-const server = http.createServer(app); 
+const server = http.createServer(app);
 const { Server } = require('socket.io')
 const io = new Server(server, { pingInterval: 2000, pingTimeout: 5000 })
 
 const PORT = process.env.PORT || 3001;
 const sess = {
-  secret: 'Super secret secret',
-  cookie: {
-    maxAge: 300000,
-    httpOnly: true,
-    secure: false,
-    sameSite: 'strict',
-  },
-  resave: false,
-  saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize
-  })
+    secret: 'Super secret secret',
+    cookie: {
+        maxAge: 300000,
+        httpOnly: true,
+        secure: false,
+        sameSite: 'strict',
+    },
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelize
+    })
 };
 
 app.use(session(sess));
@@ -43,8 +43,8 @@ app.use(express.static(path.join(__dirname, 'assets')));
 
 app.use(routes);
 
-sequelize.sync({ force:false }).then(() => {
-  server.listen(PORT, () => console.log(`Now listening on ${PORT}`));
+sequelize.sync({ force: false }).then(() => {
+    server.listen(PORT, () => console.log(`Now listening on ${PORT}`));
 });
 
 // app.use(session(sess));
@@ -56,65 +56,71 @@ let projectileId = 0;
 const playerSpeed = 10;
 
 io.on('connection', (socket) => {
-  console.log('A user connected');
-  // [socket.id] referencing a property
-  backEndPlayers[socket.id] = {
-    x: 500 * Math.random(),
-    y: 500 * Math.random(),
-    sequenceNumber: 0
-  }
-
-  io.emit('updatePlayers', backEndPlayers)
-
-  socket.on('shoot', ({x, y, angle}) => {
-    projectileId++;
-
-    const velocity = {
-        x: Math.cos(angle) * 5,
-        y: Math.sin(angle) * 5
+    console.log('A user connected');
+    // [socket.id] referencing a property
+    backEndPlayers[socket.id] = {
+        x: 500 * Math.random(),
+        y: 500 * Math.random(),
+        sequenceNumber: 0
     }
 
-    backEndProjectiles[projectileId] = {
-        x,
-        y,
-        velocity,
-        playerId: socket.id
-    }
-    console.log(backEndProjectiles)
-  })
+    io.emit('updatePlayers', backEndPlayers)
 
-  // Disconnect the player
-  socket.on('disconnect', (reason) => {
-    console.log(reason)
-    delete backEndPlayers[socket.id]
-    // Updating it on frontend too
-    io.emit('updatePlayers')
-  })
+    socket.on('shoot', ({ x, y, angle }) => {
+        projectileId++;
 
-  console.log(backEndPlayers)
+        const velocity = {
+            x: Math.cos(angle) * 5,
+            y: Math.sin(angle) * 5
+        }
 
-  socket.on('keydown', ({ keycode, sequenceNumber }) => {
-    backEndPlayers[socket.id].sequenceNumber = sequenceNumber
-  switch (keycode) {
-    case 'KeyW':
-        backEndPlayers[socket.id].y -= playerSpeed
-      break
-    
-    case 'KeyA':
-        backEndPlayers[socket.id].x -= playerSpeed
-      break
+        backEndProjectiles[projectileId] = {
+            x,
+            y,
+            velocity,
+            playerId: socket.id
+        }
+        console.log(backEndProjectiles)
+    })
 
-    case 'KeyS':
-        backEndPlayers[socket.id].y += playerSpeed
-      break
+    // Disconnect the player
+    socket.on('disconnect', (reason) => {
+        console.log(reason)
+        delete backEndPlayers[socket.id]
+        // Updating it on frontend too
+        io.emit('updatePlayers')
+    })
 
-    case 'KeyD':
-        backEndPlayers[socket.id].x += playerSpeed
-      break
-  }
-})
+    console.log(backEndPlayers)
+
+    socket.on('keydown', ({ keycode, sequenceNumber }) => {
+        backEndPlayers[socket.id].sequenceNumber = sequenceNumber
+        switch (keycode) {
+            case 'KeyW':
+                backEndPlayers[socket.id].y -= playerSpeed
+                break
+
+            case 'KeyA':
+                backEndPlayers[socket.id].x -= playerSpeed
+                break
+
+            case 'KeyS':
+                backEndPlayers[socket.id].y += playerSpeed
+                break
+
+            case 'KeyD':
+                backEndPlayers[socket.id].x += playerSpeed
+                break
+        }
+    })
 });
 
 setInterval(() => {
+    for (const id in backEndProjectiles) {
+        backEndProjectiles[id].x += backEndProjectiles[id].velocity.x
+        backEndProjectiles[id].y += backEndProjectiles[id].velocity.y
+    }
+
+    io.emit('updateProjectiles', backEndProjectiles)
     io.emit('updatePlayers', backEndPlayers)
-  }, 15);
+}, 15);

@@ -16,18 +16,38 @@ const y = canvas.height / 2;
 const player = new Player(x, y, 10, 'white');
 
 const frontEndPlayers = {}
-const frontEndProjectiles = []
+const frontEndProjectiles = {}
 
-// When user joins a game we loop through all backendplayers and if player doesn't exist
-socket.on('updatePlayers', (backendPlayers) => {
-  for (const id in backendPlayers) {
-    const backendPlayer = backendPlayers [id]
+socket.on('updateProjectiles', (backEndProjectiles) => {
+  for (const id in backEndProjectiles) {
+    const backEndProjectile = backEndProjectiles[id]
+
+    if (!frontEndProjectiles[id]) {
+      frontEndProjectiles[id] = new Projectile({
+        x: backEndProjectile.x,
+        y: backEndProjectile.y,
+        radius: 5,
+        color: 'white',
+        velocity: backEndProjectile.velocity
+      })
+    } else {
+      frontEndProjectiles[id].x += backEndProjectiles[id].velocity.x
+      frontEndProjectiles[id].y += backEndProjectiles[id].velocity.y
+    }
+  }
+})
+
+// When user joins a game we loop through all backEndPlayers and if player doesn't exist
+
+socket.on('updatePlayers', (backEndPlayers) => {
+  for (const id in backEndPlayers) {
+    const backendPlayer = backEndPlayers[id]
 
     if (!frontEndPlayers[id]) {
       frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 10, 'white')
     } else {
       if (id === socket.id) {
-      // if a player already exists
+        // if a player already exists
         frontEndPlayers[id].x = backendPlayer.x
         frontEndPlayers[id].y = backendPlayer.y
 
@@ -56,7 +76,7 @@ socket.on('updatePlayers', (backendPlayers) => {
   }
   // Deleting a player from frontend
   for (const id in frontEndPlayers) {
-    if (!backendPlayers[id]) {
+    if (!backEndPlayers[id]) {
       delete frontEndPlayers[id]
     }
   }
@@ -71,15 +91,19 @@ function animate() {
   c.fillRect(0, 0, canvas.width, canvas.height)
   // Loop through frontEndPlayers object
   for (const id in frontEndPlayers) {
-    const player = frontEndPlayers[id]
-    player.draw()
+    const frontEndPlayer = frontEndPlayers[id]
+    frontEndPlayer.draw()
   }
 
-  for (let i = frontEndProjectiles.length - 1; i >= 0; i--) {
-  const projectile = frontEndProjectiles[i];
-  console.log(projectile)
-  projectile.update();
+  for (const id in frontEndProjectiles) {
+    const frontEndProjectile = frontEndProjectiles[id]
+    frontEndProjectile.draw()
   }
+
+  // for (let i = frontEndProjectiles.length - 1; i >= 0; i--) {
+  // const projectile = frontEndProjectiles[i];
+  // projectile.update();
+  // }
 }
 
 animate()
@@ -98,41 +122,41 @@ const playerInputs = [];
 setInterval(() => {
   if (keys.w.pressed) {
     sequenceNumber++
-    playerInputs.push({sequenceNumber, dx: 0, dy: -playerSpeed})
+    playerInputs.push({ sequenceNumber, dx: 0, dy: -playerSpeed })
     frontEndPlayers[socket.id].y -= playerSpeed
-    socket.emit('keydown', {keycode: 'KeyW', sequenceNumber})
+    socket.emit('keydown', { keycode: 'KeyW', sequenceNumber })
   }
 
   if (keys.a.pressed) {
     sequenceNumber++
-    playerInputs.push({sequenceNumber, dx: -playerSpeed, dy: 0})
+    playerInputs.push({ sequenceNumber, dx: -playerSpeed, dy: 0 })
     frontEndPlayers[socket.id].x -= playerSpeed
-    socket.emit('keydown', {keycode: 'KeyA', sequenceNumber})
+    socket.emit('keydown', { keycode: 'KeyA', sequenceNumber })
   }
 
   if (keys.s.pressed) {
     sequenceNumber++
-    playerInputs.push({sequenceNumber, dx: 0, dy: playerSpeed})
+    playerInputs.push({ sequenceNumber, dx: 0, dy: playerSpeed })
     frontEndPlayers[socket.id].y += playerSpeed
-    socket.emit('keydown', {keycode: 'KeyS', sequenceNumber})
+    socket.emit('keydown', { keycode: 'KeyS', sequenceNumber })
   }
 
   if (keys.d.pressed) {
     sequenceNumber++
-    playerInputs.push({sequenceNumber, dx: playerSpeed, dy: 0})
+    playerInputs.push({ sequenceNumber, dx: playerSpeed, dy: 0 })
     frontEndPlayers[socket.id].x += playerSpeed
-    socket.emit('keydown', {keycode: 'KeyD', sequenceNumber})
+    socket.emit('keydown', { keycode: 'KeyD', sequenceNumber })
   }
 }, 15)
 
-window.addEventListener ( "keydown", (event) => {
+window.addEventListener("keydown", (event) => {
   if (!frontEndPlayers[socket.id]) return
 
   switch (event.code) {
     case 'KeyW':
       keys.w.pressed = true;
       break
-    
+
     case 'KeyA':
       keys.a.pressed = true;
       break
@@ -154,7 +178,7 @@ window.addEventListener('keyup', (event) => {
     case 'KeyW':
       keys.w.pressed = false;
       break
-    
+
     case 'KeyA':
       keys.a.pressed = false;
       break
