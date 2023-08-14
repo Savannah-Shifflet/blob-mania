@@ -6,16 +6,7 @@ form, h4{
   color: white; 
   font-family: 'VT323', monospace;
 }
-.connected span, .ready span{
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  background: red;
-}
 
-span.green{
-  background: green; 
-}
 .add_player{
   background-color: #8756a4;
   border: 0.02rem solid #fff;
@@ -58,6 +49,11 @@ span.green{
               0 0 0.8rem #bc13fe,
               0 0 1.8rem #bc13fe,
               inset 0 0 1rem #bc13fe; 
+}
+
+#logout {
+  border: none;
+  background: transparent;
 }
 
 #btnCreate,
