@@ -91,30 +91,30 @@ io.on('connection', (socket) => {
     io.emit('updatePlayers')
   })
 
-  console.log(players)
+  console.log(backEndPlayers)
 
   socket.on('keydown', ({ keycode, sequenceNumber }) => {
-    players[socket.id].sequenceNumber = sequenceNumber
+    backEndPlayers[socket.id].sequenceNumber = sequenceNumber
   switch (keycode) {
     case 'KeyW':
-        players[socket.id].y -= playerSpeed
+        backEndPlayers[socket.id].y -= playerSpeed
       break
     
     case 'KeyA':
-        players[socket.id].x -= playerSpeed
+        backEndPlayers[socket.id].x -= playerSpeed
       break
 
     case 'KeyS':
-        players[socket.id].y += playerSpeed
+        backEndPlayers[socket.id].y += playerSpeed
       break
 
     case 'KeyD':
-        players[socket.id].x += playerSpeed
+        backEndPlayers[socket.id].x += playerSpeed
       break
   }
 })
 });
 
 setInterval(() => {
-    io.emit('updatePlayers', players)
+    io.emit('updatePlayers', backEndPlayers)
   }, 15);
