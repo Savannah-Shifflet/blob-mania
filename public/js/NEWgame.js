@@ -20,6 +20,33 @@ socket.on('updatePlayers', (backendPlayers) => {
 
     if (!players[id]) {
       players[id] = new Player(backendPlayer.x, backendPlayer.y, 10, 'white')
+    } else {
+      if (id === socket.id) {
+      // if a player already exists
+        players[id].x = backendPlayer.x
+        players[id].y = backendPlayer.y
+
+        const lastBackEndInputIndex = playerInputs.findIndex(input => {
+          return backendPlayer.sequenceNumber === input.sequenceNumber
+        })
+
+        if (lastBackEndInputIndex > -1)
+          playerInputs.splice(0, lastBackEndInputIndex + 1)
+
+        playerInputs.forEach(input => {
+          players[id].x += input.dx
+          players[id].y += input.dy
+        })
+      } else {
+        // for all other players
+        // interpolation for lag so player does not teleport due to lag
+        gsap.to(players[id], {
+          x: backendPlayer.x,
+          y: backendPlayer.y,
+          duration: 0.015,
+          ease: 'linear'
+        })
+      }
     }
   }
   // Deleting a player from frontend
@@ -46,3 +73,87 @@ function animate() {
 
 animate()
 
+const keys = {
+  w: { pressed: false },
+  a: { pressed: false },
+  s: { pressed: false },
+  d: { pressed: false },
+};
+
+const playerSpeed = 10;
+let sequenceNumber = [];
+const playerInputs = [];
+
+setInterval(() => {
+  if (keys.w.pressed) {
+    sequenceNumber++
+    playerInputs.push({sequenceNumber, dx: 0, dy: -playerSpeed})
+    players[socket.id].y -= playerSpeed
+    socket.emit('keydown', {keycode: 'KeyW', sequenceNumber})
+  }
+
+  if (keys.a.pressed) {
+    sequenceNumber++
+    playerInputs.push({sequenceNumber, dx: -playerSpeed, dy: 0})
+    players[socket.id].x -= playerSpeed
+    socket.emit('keydown', {keycode: 'KeyA', sequenceNumber})
+  }
+
+  if (keys.s.pressed) {
+    sequenceNumber++
+    playerInputs.push({sequenceNumber, dx: 0, dy: playerSpeed})
+    players[socket.id].y += playerSpeed
+    socket.emit('keydown', {keycode: 'KeyS', sequenceNumber})
+  }
+
+  if (keys.d.pressed) {
+    sequenceNumber++
+    playerInputs.push({sequenceNumber, dx: playerSpeed, dy: 0})
+    players[socket.id].x += playerSpeed
+    socket.emit('keydown', {keycode: 'KeyD', sequenceNumber})
+  }
+}, 15)
+
+window.addEventListener ( "keydown", (event) => {
+  if (!players[socket.id]) return
+
+  switch (event.code) {
+    case 'KeyW':
+      keys.w.pressed = true;
+      break
+    
+    case 'KeyA':
+      keys.a.pressed = true;
+      break
+
+    case 'KeyS':
+      keys.s.pressed = true;
+      break
+
+    case 'KeyD':
+      keys.d.pressed = true;
+      break
+  }
+});
+
+window.addEventListener('keyup', (event) => {
+  if (!players[socket.id]) return
+
+  switch (event.code) {
+    case 'KeyW':
+      keys.w.pressed = false;
+      break
+    
+    case 'KeyA':
+      keys.a.pressed = false;
+      break
+
+    case 'KeyS':
+      keys.s.pressed = false;
+      break
+
+    case 'KeyD':
+      keys.d.pressed = false;
+      break
+  }
+});
