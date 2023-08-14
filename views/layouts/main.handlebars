@@ -21,8 +21,16 @@
       </div>
     </div>
     {{!-- TODO added if statement for loggedin/out --}}
-      {{!-- <a class = "position-absolute top-0 end-0 m-3 login" href="/profile">Login/Profile</a> --}}
-      <a class = "position-absolute top-0 end-0 m-3 login" href="/login">Login/Profile</a>
+    {{#if loggedIn}}
+      <div class = "position-absolute top-0 end-0 m-3">
+        <a class = "login me-4" href="/profile">Profile</a>
+        <a class = "login" href="/logout">Logout</a>
+      </div>
+      
+    {{else}}
+      <a class = "position-absolute top-0 end-0 m-3 login" href="/login">Login</a>
+    {{/if}}
+    
 
   </nav>
   <main class="container">
