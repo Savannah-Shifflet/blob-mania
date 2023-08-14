@@ -1,10 +1,25 @@
 <div class="container mt-4">
     <div id="gameScore">
-        <span>Score: <span id="scoreEl">0</span></span>
+        <span>{{user.name}}: <span id="scoreEl">0</span></span>
     </div>
     <div>
         <canvas id="canvas1"></canvas>
         <button id="play-btn">Play</button>
+        {{#if loggedIn}}
+        <style>
+            #play-btn {
+                display: none
+            }
+        </style>
+        {{else}}
+        <h2 id="login-status">Must be logged in, in order to play!</h2>
+        <style>
+            #gameScore,
+            #canvas1 {
+                display: none
+            }
+        </style>
+        {{/if}}
     </div>
 </div>
 

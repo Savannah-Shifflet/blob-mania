@@ -181,10 +181,13 @@ form, h4{
   max-width: 800px;
 }
 
+#login-status,
 #play-btn {
+  border: 2px outset black;
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   transition: all .2s ease-in-out; 
   display: flex;
   margin: auto auto;
@@ -193,3 +196,7 @@ form, h4{
   font-family: 'VT323', monospace;
   font-size: 32px;
 }
+
+  #login-status {
+    display: none;
+  }
