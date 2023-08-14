@@ -24,9 +24,9 @@
     {{#if loggedIn}}
       <div class = "position-absolute top-0 end-0 m-3">
         <a class = "login me-4" href="/profile">Profile</a>
-        <a class = "login" href="/logout">Logout</a>
+        <button class = "login" id = "logout">Logout</button>
       </div>
-      
+      <script src="/js/logout.js"></script>
     {{else}}
       <a class = "position-absolute top-0 end-0 m-3 login" href="/login">Login</a>
     {{/if}}
@@ -37,6 +37,8 @@
     {{{ body }}}
   </main>
 
+
 </body>
 
 </html>
+
