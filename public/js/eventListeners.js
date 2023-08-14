@@ -28,3 +28,8 @@ canvas.addEventListener('click', (event) => {
   // )
   console.log(frontEndProjectiles);
 })
+
+// TODO: add event listener to hide the play button and check if the user is logged in when the button is clicked
+play-btnCreate.addEventListener('click', () => {
+
+})
