@@ -1,33 +1,26 @@
-<section class="container mt-5 col-md-9">
-    <canvas id="canvas1"></canvas>
-</section>
-{{!-- <section class="container mt-5 w-75 h-auto" id="chat-box">
-    <pre id="messages" style="overflow: scroll"></pre>
-    <input class="w-100" type="text" id="user-input" placeholder="Type message here" />
-    <button id="send-btn">Send</button>
-</section> --}}
-
-    <button class="btn w-100" id="play-button">Play Game</button>
-
-    <div class="player" id = "p1">
-        Player 1
-        <div class="connected">Connected <span id = "p1-connected"></span></div>
-        <div class="ready">Ready <span id = "p1-ready"></span></div>
+    <div
+      style="
+        position: absolute;
+        color: white;
+        padding: 8px;
+        font-family: sans-serif;
+        font-size: 14px;
+        user-select: none;
+      "
+    >
+      <span>Score: <span id="scoreEl">0</span></span>
     </div>
-    <div class="player" id = "p2">
-        Player 2
-        <div class="connected">Connected <span id = "p2-connected"></span></div>
-        <div class="ready">Ready <span id = "p2-ready"></span></div>
-    </div>
+    <canvas></canvas>
 
-    <button class="btn w-100" id="start-button">Start Game</button>
-
-    <section class="container mt-5 col-md-9">
-        <canvas id="canvas1"></canvas>
-    </section>
-    </div>
-
-
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/NEWgame.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.2/gsap.min.js"
+      integrity="sha512-kVlGhj2qFy+KBCFuvjBJTGUMxbdqJKs4yK2jh0e0VPhWUPiPC87bzm4THmaaIee3Oj7j6sDpTTgm2EPPiESqBg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script src="./js/classes/Player.js"></script>
+    <script src="./js/classes/Particle.js"></script>
+    <script src="./js/classes/Projectile.js"></script>
+    {{!-- <script src="./js/eventListeners.js"></script> --}}
+    <script src="./js/NEWgame.js"></script>
