@@ -2,6 +2,16 @@ body {
   background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%);
 }
 
+.connected span, .ready span{
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background: red;
+}
+
+span.green{
+  background: green; 
+}
 .add_player{
   background-color: #8756a4;
   border: 0.02rem solid #fff;
