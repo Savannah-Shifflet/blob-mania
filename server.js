@@ -43,28 +43,47 @@ app.use(routes);
 // };
 
 // app.use(session(sess));
-const players = {
+const backEndPlayers = {};
+const backEndProjectiles = {};
 
-}
+let projectileId = 0;
 
 io.on('connection', (socket) => {
   console.log('A user connected');
   // [socket.id] referencing a property
-  players[socket.id] = {
+  backEndPlayers[socket.id] = {
     x: 500 * Math.random(),
     y: 500 * Math.random()
   }
 
-  io.emit('updatePlayers', players)
+  io.emit('updatePlayers', backEndPlayers)
+
+  socket.on('shoot', ({x, y, angle}) => {
+    projectileId++;
+
+    const velocity = {
+        x: Math.cos(angle) * 5,
+        y: Math.sin(angle) * 5
+    }
+
+    backEndProjectiles[projectileId] = {
+        x,
+        y,
+        velocity,
+        playerId: socket.id
+    }
+    console.log(backEndProjectiles)
+  })
+
   // Disconnect the player
   socket.on('disconnect', (reason) => {
     console.log(reason)
-    delete players[socket.id]
+    delete backEndPlayers[socket.id]
     // Updating it on frontend too
     io.emit('updatePlayers')
   })
 
-  console.log(players)
+  console.log(backEndPlayers)
 });
 
 server.listen(PORT, () => console.log(`Now listening on ${PORT}`));
