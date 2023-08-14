@@ -1,9 +1,20 @@
 class Player {
-  constructor(x, y, radius, color) {
-    this.x = x
-    this.y = y
-    this.radius = radius
-    this.color = color
+  imageSrc
+  constructor(x, y, radius, imageSrc) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.image = new Image();
+    this.image.src = imageSrc;
+
+    if (this.image.complete) {
+      this.loaded = true;
+    } else {
+      this.image.onload = () => {
+        this.loaded = true;
+        this.draw();
+      };
+    }
   }
 
   draw() {
@@ -11,5 +22,8 @@ class Player {
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
     c.fillStyle = this.color
     c.fill()
+    if (this.loaded) {
+      c.drawImage(this.image, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+    }
   }
 }

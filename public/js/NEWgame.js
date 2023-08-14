@@ -5,18 +5,19 @@ const socket = io()
 
 const scoreEl = document.querySelector('#scoreEl')
 
-const devicePixelRatio = window.devicePixelRatio || 1
+// const devicePixelRatio = window.devicePixelRatio || 1
 
-canvas.width = innerWidth * devicePixelRatio;
-canvas.height = innerHeight * devicePixelRatio;
+// canvas.width = innerWidth * devicePixelRatio;
+// canvas.height = innerHeight * devicePixelRatio;
+canvas.width = 1200;
+canvas.height = 750;
 
 const x = canvas.width / 2;
 const y = canvas.height / 2;
 
-const player = new Player(x, y, 10, 'white');
-
 const frontEndPlayers = {}
 const frontEndProjectiles = {}
+
 
 socket.on('connect', () => {
   socket.emit('initCanvas', { width: canvas.width, height: canvas.height, devicePixelRatio })
@@ -47,13 +48,16 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
 })
 
 // When user joins a game we loop through all backEndPlayers and if player doesn't exist
+const player = new Player(x, y, 40)
+const playerImageSrc = './blob1.png';
 
-socket.on('updatePlayers', (backEndPlayers) => {
-  for (const id in backEndPlayers) {
-    const backendPlayer = backEndPlayers[id]
+// When user joins a game we loop through all backendplayers and if player doesn't exist
+socket.on('updatePlayers', (backendPlayers) => {
+  for (const id in backendPlayers) {
+    const backendPlayer = backendPlayers [id]
 
     if (!frontEndPlayers[id]) {
-      frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 10, 'white')
+      frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, playerImageSrc)
     } else {
       if (id === socket.id) {
         // if a player already exists
