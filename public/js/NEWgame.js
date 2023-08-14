@@ -13,10 +13,12 @@ canvas.height = innerHeight * devicePixelRatio;
 const x = canvas.width / 2;
 const y = canvas.height / 2;
 
-const player = new Player(x, y, 10, 'white');
-
 const frontEndPlayers = {}
 const frontEndProjectiles = []
+
+const player = new Player(x, y, 40)
+const players = {}
+const playerImageSrc = './blob1.png';
 
 // When user joins a game we loop through all backendplayers and if player doesn't exist
 socket.on('updatePlayers', (backendPlayers) => {
@@ -24,7 +26,7 @@ socket.on('updatePlayers', (backendPlayers) => {
     const backendPlayer = backendPlayers [id]
 
     if (!frontEndPlayers[id]) {
-      frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 10, 'white')
+      frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, playerImageSrc)
     } else {
       if (id === socket.id) {
       // if a player already exists
