@@ -51,12 +51,15 @@ const players = {
 
 }
 
+const playerSpeed = 10;
+
 io.on('connection', (socket) => {
   console.log('A user connected');
   // [socket.id] referencing a property
   players[socket.id] = {
     x: 500 * Math.random(),
-    y: 500 * Math.random()
+    y: 500 * Math.random(),
+    sequenceNumber: 0
   }
 
   io.emit('updatePlayers', players)
@@ -69,6 +72,29 @@ io.on('connection', (socket) => {
   })
 
   console.log(players)
+
+  socket.on('keydown', ({ keycode, sequenceNumber }) => {
+    players[socket.id].sequenceNumber = sequenceNumber
+  switch (keycode) {
+    case 'KeyW':
+        players[socket.id].y -= playerSpeed
+      break
+    
+    case 'KeyA':
+        players[socket.id].x -= playerSpeed
+      break
+
+    case 'KeyS':
+        players[socket.id].y += playerSpeed
+      break
+
+    case 'KeyD':
+        players[socket.id].x += playerSpeed
+      break
+  }
+})
 });
 
-
+setInterval(() => {
+    io.emit('updatePlayers', players)
+  }, 15);
