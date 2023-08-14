@@ -18,6 +18,10 @@ const player = new Player(x, y, 10, 'white');
 const frontEndPlayers = {}
 const frontEndProjectiles = {}
 
+socket.on('connect', () => {
+  socket.emit('initCanvas', { width: canvas.width, height: canvas.height })
+})
+
 socket.on('updateProjectiles', (backEndProjectiles) => {
   for (const id in backEndProjectiles) {
     const backEndProjectile = backEndProjectiles[id]
@@ -27,12 +31,17 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
         x: backEndProjectile.x,
         y: backEndProjectile.y,
         radius: 5,
-        color: 'white',
+        color: frontEndPlayers[backEndProjectile.playerId]?.color,
         velocity: backEndProjectile.velocity
       })
     } else {
       frontEndProjectiles[id].x += backEndProjectiles[id].velocity.x
       frontEndProjectiles[id].y += backEndProjectiles[id].velocity.y
+    }
+  }
+  for (const frontEndProjectileId in frontEndProjectiles) {
+    if (!backEndProjectiles[frontEndProjectileId]) {
+      delete frontEndProjectiles[frontEndProjectileId]
     }
   }
 })
@@ -80,7 +89,6 @@ socket.on('updatePlayers', (backEndPlayers) => {
       delete frontEndPlayers[id]
     }
   }
-  console.log(frontEndPlayers)
 })
 
 let animationId
