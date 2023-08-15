@@ -20,6 +20,28 @@ const y = canvas.height / 2;
 const frontEndPlayers = {};
 const frontEndProjectiles = {};
 
+// Music
+const music = new Audio('/sprites/gamemusic.mp3');
+music.loop = true;
+music.volume = 0.2;
+music.addEventListener('canplay', () => {
+  music.play();
+});
+const button = document.querySelector('#musicBtn');
+const image = document.querySelector('#img-change');
+
+button.addEventListener('click', function() {
+  if (music.paused) {
+    music.play();
+    image.src = '/sprites/pausebtn.png';
+  } else {
+    music.pause();
+    image.src = '/sprites/playbtn.png';
+  }
+});
+
+music.play();
+
 
 socket.on('connect', () => {
   socket.emit('initCanvas', { width: canvas.width, height: canvas.height, devicePixelRatio });
@@ -35,8 +57,9 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
         y: backEndProjectile.y,
         radius: 5,
         color: frontEndPlayers[backEndProjectile.playerId]?.color,
-        velocity: backEndProjectile.velocity
+        velocity: backEndProjectile.velocity,
       });
+      frontEndProjectiles[id].playSound(0.2);
     } else {
       frontEndProjectiles[id].x += backEndProjectiles[id].velocity.x;
       frontEndProjectiles[id].y += backEndProjectiles[id].velocity.y;
@@ -48,6 +71,7 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
     }
   }
 })
+
 const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png', 'sprites/blob1a.png', 'sprites/blob2a.png', 'sprites/blob3a.png', 'sprites/blob4a.png'];
 
 let imageIterator = 0;
@@ -146,7 +170,11 @@ function animate() {
   // Loop through frontEndPlayers object
   for (const id in frontEndPlayers) {
     const frontEndPlayer = frontEndPlayers[id]
-    frontEndPlayer.draw()
+    if (socket.id === id) {
+      frontEndPlayer.draw('You');
+    } else {
+      frontEndPlayer.draw('Enemy');
+    }
   };
 
   for (const id in frontEndProjectiles) {
@@ -157,7 +185,7 @@ function animate() {
   // Flipping a sprite
   for (const id in frontEndPlayers) {
     const player = frontEndPlayers[id];
-    player.draw();
+    player.draw('');
   };
 };
 
