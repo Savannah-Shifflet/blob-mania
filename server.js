@@ -53,7 +53,7 @@ const backEndProjectiles = {};
 
 let projectileId = 0;
 const PROJECTILE_RADIUS = 5;
-const playerSpeed = 10;
+const playerSpeed = 3;
 const playerRadius = 10;
 
 io.on('connection', (socket) => {
