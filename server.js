@@ -11,7 +11,10 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const server = http.createServer(app);
 const { Server } = require('socket.io')
-const io = new Server(server, { pingInterval: 2000, pingTimeout: 5000 })
+const io = new Server(server, { pingInterval: 2000, pingTimeout: 5000, 
+    cors: {
+        origin: 'https://blob-mania-322037286e7b.herokuapp.com/'
+    } });
 
 const PORT = process.env.PORT || 3001;
 const sess = {

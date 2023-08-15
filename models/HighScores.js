@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class HighScore extends Model {}
+class HighScores extends Model {}
 
-HighScore.init(
+HighScores.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -31,4 +31,4 @@ HighScore.init(
     }
 );
 
-module.exports = HighScore; 
+module.exports = HighScores; 
