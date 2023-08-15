@@ -52,6 +52,7 @@ form, h4{
 
 #canvas1 {
   /* display: none; */
+  background-image: url('/background1.png');
   width: 1200px;
   height: 750px;
   border: 0.2rem solid #fff;
