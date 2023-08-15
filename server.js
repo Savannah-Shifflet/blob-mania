@@ -154,7 +154,6 @@ setInterval(() => {
             if (DISTANCE < PROJECTILE_RADIUS + backEndPlayer.radius && backEndProjectiles[id].playerId !== playerId) {
                 // A player who shot a projectile
                 backEndPlayers[backEndProjectiles[id].playerId].score++
-                console.log(backEndPlayers[backEndProjectiles[id].playerId])
                 delete backEndProjectiles[id]
                 delete backEndPlayers[playerId]
                 break;
