@@ -71,16 +71,13 @@ io.on('connection', (socket) => {
 
     io.emit('updatePlayers', backEndPlayers)
 
-    socket.on('initCanvas', ({ width, height, devicePixelRatio }) => {
+    socket.on('initCanvas', ({ width, height }) => {
         backEndPlayers[socket.id].canvas = {
             width,
             height
         }
 
         backEndPlayers[socket.id].radius = playerRadius
-        if (devicePixelRatio > 1) {
-            backEndPlayers[socket.id].radius = 2 * playerRadius
-        }
     })
 
     socket.on('shoot', ({ x, y, angle }) => {
