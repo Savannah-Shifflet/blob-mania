@@ -169,3 +169,5 @@ setInterval(() => {
     io.emit('updateProjectiles', backEndProjectiles)
     io.emit('updatePlayers', backEndPlayers)
 }, 15);
+
+module.exports = backEndPlayers;

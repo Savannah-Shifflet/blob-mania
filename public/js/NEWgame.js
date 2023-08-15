@@ -1,10 +1,10 @@
-const canvas = document.querySelector('canvas')
-const c = canvas.getContext('2d')
+const canvas = document.querySelector('canvas');
+const c = canvas.getContext('2d');
 
-const socket = io()
+const socket = io();
 
-const scoreEl = document.querySelector('#scoreEl')
-const devicePixelRatio = window.devicePixelRatio || 1
+const scoreEl = document.querySelector('#scoreEl');
+const devicePixelRatio = window.devicePixelRatio || 1;
 
 // canvas.width = innerWidth * devicePixelRatio;
 // canvas.height = innerHeight * devicePixelRatio;
@@ -16,17 +16,17 @@ c.scale(devicePixelRatio, devicePixelRatio);
 const x = canvas.width / 2;
 const y = canvas.height / 2;
 
-const frontEndPlayers = {}
-const frontEndProjectiles = {}
+const frontEndPlayers = {};
+const frontEndProjectiles = {};
 
 
 socket.on('connect', () => {
-  socket.emit('initCanvas', { width: canvas.width, height: canvas.height, devicePixelRatio })
-})
+  socket.emit('initCanvas', { width: canvas.width, height: canvas.height, devicePixelRatio });
+});
 
 socket.on('updateProjectiles', (backEndProjectiles) => {
   for (const id in backEndProjectiles) {
-    const backEndProjectile = backEndProjectiles[id]
+    const backEndProjectile = backEndProjectiles[id];
 
     if (!frontEndProjectiles[id]) {
       frontEndProjectiles[id] = new Projectile({
@@ -35,18 +35,18 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
         radius: 5,
         color: frontEndPlayers[backEndProjectile.playerId]?.color,
         velocity: backEndProjectile.velocity
-      })
+      });
     } else {
-      frontEndProjectiles[id].x += backEndProjectiles[id].velocity.x
-      frontEndProjectiles[id].y += backEndProjectiles[id].velocity.y
-    }
-  }
+      frontEndProjectiles[id].x += backEndProjectiles[id].velocity.x;
+      frontEndProjectiles[id].y += backEndProjectiles[id].velocity.y;
+    };
+  };
   for (const frontEndProjectileId in frontEndProjectiles) {
     if (!backEndProjectiles[frontEndProjectileId]) {
-      delete frontEndProjectiles[frontEndProjectileId]
-    }
-  }
-})
+      delete frontEndProjectiles[frontEndProjectileId];
+    };
+  };
+});
 
 let imageIterator = 0;
 
@@ -54,21 +54,21 @@ let imageIterator = 0;
 socket.on('updatePlayers', (backEndPlayers) => {
   if (!backEndPlayers) {
     imageIterator = 0;
-  }
+  };
 
   for (const id in backEndPlayers) {
-    const backendPlayer = backEndPlayers[id]
+    const backendPlayer = backEndPlayers[id];
 
     if (!frontEndPlayers[id]) {
       // Randomizing a sprite color for each player
       const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png'];
       const selectedImage = playerImageSrc[imageIterator];
       imageIterator++;
-      frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, selectedImage, 5)
+      frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, selectedImage, 5);
       // Adding a player in playerscore
-      document.querySelector('#playerScore').innerHTML += `<div data-id='${id}'>${id}: ${backendPlayer.score}</div>`
+      document.querySelector('#playerScore').innerHTML += `<div data-id='${id}'>${id}: ${backendPlayer.score}</div>`;
     } else {
-      document.querySelector(`div[data-id="${id}"]`).innerHTML = `${id}: ${backendPlayer.score}`
+      document.querySelector(`div[data-id="${id}"]`).innerHTML = `${id}: ${backendPlayer.score}`;
 
       if (id === socket.id) {
         // if a player already exists
@@ -77,7 +77,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
 
         const lastBackEndInputIndex = playerInputs.findIndex(input => {
           return backendPlayer.sequenceNumber === input.sequenceNumber
-        })
+        });
 
         if (lastBackEndInputIndex > -1)
           playerInputs.splice(0, lastBackEndInputIndex + 1)
@@ -85,7 +85,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
         playerInputs.forEach(input => {
           frontEndPlayers[id].x += input.dx
           frontEndPlayers[id].y += input.dy
-        })
+        });
       } else {
         // for all other frontEndPlayers
         // interpolation for lag so player does not teleport due to lag
@@ -94,10 +94,10 @@ socket.on('updatePlayers', (backEndPlayers) => {
           y: backendPlayer.y,
           duration: 0.015,
           ease: 'linear'
-        })
-      }
-    }
-  }
+        });
+      };
+    };
+  };
   // Deleting a player from frontend
   for (const id in frontEndPlayers) {
     if (!backEndPlayers[id]) {
@@ -105,11 +105,12 @@ socket.on('updatePlayers', (backEndPlayers) => {
       const deleteDiv = document.querySelector(`div[data-id="${id}"]`)
       deleteDiv.parentNode.removeChild(deleteDiv)
       delete frontEndPlayers[id]
-    }
-  }
-})
+    };
+  };
+});
 
-let animationId
+let animationId;
+
 // let score = 0
 function animate() {
   animationId = requestAnimationFrame(animate)
@@ -119,24 +120,21 @@ function animate() {
   for (const id in frontEndPlayers) {
     const frontEndPlayer = frontEndPlayers[id]
     frontEndPlayer.draw()
-  }
+  };
 
   for (const id in frontEndProjectiles) {
     const frontEndProjectile = frontEndProjectiles[id]
     frontEndProjectile.draw()
-  }
+  };
+
   // Flipping a sprite
   for (const id in frontEndPlayers) {
     const player = frontEndPlayers[id];
     player.draw();
-  }
-  // for (let i = frontEndProjectiles.length - 1; i >= 0; i--) {
-  // const projectile = frontEndProjectiles[i];
-  // projectile.update();
-  // }
-}
+  };
+};
 
-animate()
+animate();
 
 const keys = {
   w: { pressed: false },
@@ -155,29 +153,29 @@ setInterval(() => {
     playerInputs.push({ sequenceNumber, dx: 0, dy: -playerSpeed })
     frontEndPlayers[socket.id].y -= playerSpeed
     socket.emit('keydown', { keycode: 'KeyW', sequenceNumber })
-  }
+  };
 
   if (keys.a.pressed) {
     sequenceNumber++
     playerInputs.push({ sequenceNumber, dx: -playerSpeed, dy: 0 })
     frontEndPlayers[socket.id].x -= playerSpeed
     socket.emit('keydown', { keycode: 'KeyA', sequenceNumber })
-  }
+  };
 
   if (keys.s.pressed) {
     sequenceNumber++
     playerInputs.push({ sequenceNumber, dx: 0, dy: playerSpeed })
     frontEndPlayers[socket.id].y += playerSpeed
     socket.emit('keydown', { keycode: 'KeyS', sequenceNumber })
-  }
+  };
 
   if (keys.d.pressed) {
     sequenceNumber++
     playerInputs.push({ sequenceNumber, dx: playerSpeed, dy: 0 })
     frontEndPlayers[socket.id].x += playerSpeed
     socket.emit('keydown', { keycode: 'KeyD', sequenceNumber })
-  }
-}, 15)
+  };
+}, 15);
 
 window.addEventListener("keydown", (event) => {
   if (!frontEndPlayers[socket.id]) return
@@ -185,22 +183,22 @@ window.addEventListener("keydown", (event) => {
   switch (event.code) {
     case 'KeyW':
       keys.w.pressed = true;
-      break
+      break;
 
     case 'KeyA':
       keys.a.pressed = true;
       frontEndPlayers[socket.id].a = true;
-      break
+      break;
 
     case 'KeyS':
       keys.s.pressed = true;
-      break
+      break;
 
     case 'KeyD':
       keys.d.pressed = true;
       frontEndPlayers[socket.id].d = true;
-      break
-  }
+      break;
+  };
 });
 
 window.addEventListener('keyup', (event) => {
@@ -209,22 +207,22 @@ window.addEventListener('keyup', (event) => {
   switch (event.code) {
     case 'KeyW':
       keys.w.pressed = false;
-      break
+      break;
 
     case 'KeyA':
       keys.a.pressed = false;
       frontEndPlayers[socket.id].a = true;
       frontEndPlayers[socket.id].d = false;
-      break
+      break;
 
     case 'KeyS':
       keys.s.pressed = false;
-      break
+      break;
 
     case 'KeyD':
       keys.d.pressed = false;
       frontEndPlayers[socket.id].a = false;
       frontEndPlayers[socket.id].d = true;
-      break
-  }
+      break;
+  };
 });
