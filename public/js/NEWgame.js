@@ -45,8 +45,6 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
     }
   }
 })
-
-// When user joins a game we loop through all backEndPlayers and if player doesn't exist
 const player = new Player(x, y, 40)
 const playerImageSrc = './blob1.png';
 
@@ -57,7 +55,11 @@ socket.on('updatePlayers', (backendPlayers) => {
 
     if (!frontEndPlayers[id]) {
       frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, playerImageSrc)
+    // Adding a player in playerscore
+      document.querySelector('#playerScore').innerHTML += `<div data-id='${id}'>${id}: ${backendPlayer.score}</div>`
     } else {
+        document.querySelector(`div[data-id="${id}"]`).innerHTML = `${id}: ${backendPlayer.score}`
+
       if (id === socket.id) {
         // if a player already exists
         frontEndPlayers[id].x = backendPlayer.x
@@ -89,6 +91,9 @@ socket.on('updatePlayers', (backendPlayers) => {
   // Deleting a player from frontend
   for (const id in frontEndPlayers) {
     if (!backendPlayers[id]) {
+
+      const deleteDiv = document.querySelector(`div[data-id="${id}"]`)
+      deleteDiv.parentNode.removeChild(deleteDiv)
       delete frontEndPlayers[id]
     }
   }

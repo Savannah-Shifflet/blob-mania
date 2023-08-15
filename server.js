@@ -62,7 +62,8 @@ io.on('connection', (socket) => {
     backEndPlayers[socket.id] = {
         x: 500 * Math.random(),
         y: 500 * Math.random(),
-        sequenceNumber: 0
+        sequenceNumber: 0,
+        score: 0
     }
 
     io.emit('updatePlayers', backEndPlayers)
@@ -151,6 +152,9 @@ setInterval(() => {
                 backEndProjectiles[id].y - backEndPlayer.y
             )
             if (DISTANCE < PROJECTILE_RADIUS + backEndPlayer.radius && backEndProjectiles[id].playerId !== playerId) {
+                // A player who shot a projectile
+                backEndPlayers[backEndProjectiles[id].playerId].score++
+                console.log(backEndPlayers[backEndProjectiles[id].playerId])
                 delete backEndProjectiles[id]
                 delete backEndPlayers[playerId]
                 break;
