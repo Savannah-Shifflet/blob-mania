@@ -7,15 +7,8 @@
 
     </div>
     <div>
-        <canvas id="canvas1"></canvas>
-        <button id="play-btn">Click to Play!</button>
         {{#if loggedIn}}
-        <style>
-            #play-btn,
-            #about-blobs {
-                display: none;
-            }
-        </style>
+        <canvas id="canvas1"></canvas>
         {{else}}
         <h2 id="login-status">Must be logged in, in order to play!</h2>
         <style>
@@ -25,21 +18,6 @@
             }
         </style>
         {{/if}}
-        <div id="about-blobs">
-            <h2 class="text-center">About the Blobs!</h2>
-            <p>Blob Mania is a multiplayer 2D shooter! Each player is given 5 lives. Shoot the other player while
-                dodging their attacks to win!</p>
-            <h3>How to Play:</h3>
-            <h4>Movement:</h4>
-            <ul>
-                <li>W - Move Up</li>
-                <li>A - Move Left</li>
-                <li>S - Move Down</li>
-                <li>D - Move Right</li>
-            </ul>
-            <h4>Attack:</h4>
-            <ul>M1 - Click on the Game Window to shoot a projectile</ul>
-        </div>
     </div>
 </div>
 

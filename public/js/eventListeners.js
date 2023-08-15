@@ -38,4 +38,5 @@ const loginStatus = document.getElementById('login-status');
 playButton.addEventListener('click', (event) => {
   playButton.style.display = 'none';
   loginStatus.style.display = 'block';
+  document.location.replace('/gameplay');
 })

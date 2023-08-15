@@ -1,17 +1,22 @@
 const router = require('express').Router();
 const { User, HighScores } = require('../models');
 
-router.get('/', async (req, res) => {
+router.get('/', async (req,res) => {
+  try{
+    res.render('homepage')
+  }catch(err){
+    res.status(500).json(err);
+  }
+});
+
+router.get('/gameplay', async (req, res) => {
   try { 
     if (req.session.logged_in) {
     const userData = await User.findByPk(req.session.user_id);
     const user = userData.get({ plain:true });
-    console.log(userData);
-    console.log(user);
     res.render('gameplay', { user, loggedIn: req.session.logged_in} );
-    console.log(req.session.user_id)
   } else {
-    res.render('gameplay')
+    res.render('gameplay', {loggedIn: req.session.logged_in})
   }
   } catch (err) {
     res.status(500).json(err);

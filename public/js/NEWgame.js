@@ -4,12 +4,13 @@ const c = canvas.getContext('2d');
 const socket = io();
 
 const scoreEl = document.querySelector('#scoreEl');
-const devicePixelRatio = window.devicePixelRatio || 1;
+const devicePixelRatio = 1;
+console.log(devicePixelRatio);
 
 // canvas.width = innerWidth * devicePixelRatio;
 // canvas.height = innerHeight * devicePixelRatio;
-canvas.width = 1200 * devicePixelRatio;
-canvas.height = 750 * devicePixelRatio;
+canvas.width = 800 * devicePixelRatio;
+canvas.height = 400 * devicePixelRatio;
 
 c.scale(devicePixelRatio, devicePixelRatio);
 
