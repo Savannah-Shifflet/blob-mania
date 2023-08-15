@@ -51,6 +51,7 @@ sequelize.sync({ force: false }).then(() => {
 const backEndPlayers = {};
 const backEndProjectiles = {};
 
+let backEndLives = 5;
 let projectileId = 0;
 const PROJECTILE_RADIUS = 5;
 const playerSpeed = 10;
@@ -152,10 +153,15 @@ setInterval(() => {
             )
             if (DISTANCE < PROJECTILE_RADIUS + backEndPlayer.radius && backEndProjectiles[id].playerId !== playerId) {
                 delete backEndProjectiles[id]
-                delete backEndPlayers[playerId]
+                if (backEndLives <= 0) {
+                    delete backEndPlayers[playerId]
+                } else {
+                    backEndLives--;
+                }
+                console.log(backEndLives);
                 break;
             }
-                console.log(DISTANCE)
+                // console.log(DISTANCE)
         }
     }
 
