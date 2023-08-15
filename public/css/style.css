@@ -68,9 +68,7 @@ a:hover{
 }
 
 #canvas1 {
-  display: flex;
-  background: linear-gradient(#c14d9d, #7e5ba6, #5779bc, #48b5c2);
-  margin: auto;  
+  background: linear-gradient(#e66465, #9198e5);  width: 1200px;
   width: 800px;
   height: 500px;
   border: 0.2rem solid #fff;
@@ -81,6 +79,10 @@ a:hover{
     0 0 0.8rem #bc13fe,
     0 0 1.8rem #bc13fe,
     inset 0 0 1rem #bc13fe;
+}
+#gameScore div {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
 }
 
 #logout {
@@ -97,10 +99,9 @@ a:hover{
   user-select: none;
 }
 
-#btnCreate,
-#btnJoin,
 #send-btn,
-#play-btn {
+#play-btn, 
+.neon-btn {
   transition: all .2s ease-in-out;
   display: flex;
   margin: auto auto;
@@ -117,9 +118,9 @@ a:hover{
   margin-top: 10px;
 }
 
-#btnCreate:hover,
-#btnJoin:hover,
-#play-btn:hover {
+
+#play-btn:hover,
+.neon-btn:hover {
   border: 0.2rem solid #fff;
   border-radius: 2rem;
   box-shadow: 0 0 .2rem #fff,

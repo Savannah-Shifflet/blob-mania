@@ -1,25 +1,27 @@
-<div class="container mt-4">
-    <div id="gameScore">
-        <div>Leaderboard</div>
-        <div id="playerScore">
+<div class="container vw-100 mt-4">
+    <div class = "row w-100" id="gameScore">
+        <div class = 'col-12'>
+        <h4>Leaderboard</h4>
+        <div id="playerScore"></div>
         </div>
-
-
-    </div>
-    <div id="canvasHolder">
-        {{#if loggedIn}}
-        <canvas class = "mb-5" id="canvas1"></canvas>
-        {{else}}
-        <h2 id="login-status">Must be logged in, in order to play!</h2>
-        <style>
-            #gameScore,
-            #canvas1 {
-                display: none
-            }
-        </style>
-        {{/if}}
     </div>
 </div>
+<div class = 'container' id="canvasHolder">
+    {{#if loggedIn}}
+    <div class = "my-5 row align-items-end justify-content-center">
+    <canvas id="canvas1"></canvas>
+    </div>
+    {{else}}
+    <h2 id="login-status">Must be logged in, in order to play!</h2>
+    <style>
+        #gameScore,
+        #canvas1 {
+            display: none
+        }
+    </style>
+    {{/if}}
+</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.2/gsap.min.js"
     integrity="sha512-kVlGhj2qFy+KBCFuvjBJTGUMxbdqJKs4yK2jh0e0VPhWUPiPC87bzm4THmaaIee3Oj7j6sDpTTgm2EPPiESqBg=="
