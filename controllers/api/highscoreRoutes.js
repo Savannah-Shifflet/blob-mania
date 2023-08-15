@@ -4,7 +4,7 @@ const { HighScores } = require('../../models');
 // POST request to submit a highscore
 router.post('/', async (req, res) => {
     try {
-        const highScoreData = await HighScores.create(req.body);
+        const highScoreData = await HighScores.create({score: req.body.score, user_id: req.session.user_id});
         res.status(200).json(highScoreData);
     } catch (err){
         res.status(400).json(err);
