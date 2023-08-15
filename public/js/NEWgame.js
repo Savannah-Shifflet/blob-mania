@@ -61,7 +61,7 @@ socket.on('updatePlayers', (backendPlayers) => {
         const randomImage = Math.floor(Math.random() * playerImageSrc.length);
         const selectedImage = playerImageSrc[randomImage];
 
-      frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, selectedImage)
+      frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, selectedImage, 5)
     // Adding a player in playerscore
       document.querySelector('#playerScore').innerHTML += `<div data-id='${id}'>${id}: ${backendPlayer.score}</div>`
     } else {

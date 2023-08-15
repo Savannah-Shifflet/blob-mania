@@ -54,6 +54,7 @@ sequelize.sync({ force: false }).then(() => {
 const backEndPlayers = {};
 const backEndProjectiles = {};
 
+// let backEndLives = 5;
 let projectileId = 0;
 const PROJECTILE_RADIUS = 5;
 const playerSpeed = 3;
@@ -66,7 +67,8 @@ io.on('connection', (socket) => {
         x: 500 * Math.random(),
         y: 500 * Math.random(),
         sequenceNumber: 0,
-        score: 0
+        score: 0,
+        lives: 5
     }
 
     io.emit('updatePlayers', backEndPlayers)
@@ -133,7 +135,6 @@ setInterval(() => {
         backEndProjectiles[id].x += backEndProjectiles[id].velocity.x
         backEndProjectiles[id].y += backEndProjectiles[id].velocity.y
 
-        const PROJECTILE_RADIUS = 5
         if (backEndProjectiles[id].x - PROJECTILE_RADIUS >=
             backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.width ||
             backEndProjectiles[id].x + PROJECTILE_RADIUS <= 0 ||
@@ -155,10 +156,13 @@ setInterval(() => {
                 // A player who shot a projectile
                 backEndPlayers[backEndProjectiles[id].playerId].score++
                 delete backEndProjectiles[id]
-                delete backEndPlayers[playerId]
+                backEndPlayers[playerId].lives--;
+                if (backEndPlayers[playerId].lives <= 0) {
+                    delete backEndPlayers[playerId]
+                }
+                // console.log(backEndPlayers[playerId]);
                 break;
             }
-                console.log(DISTANCE)
         }
     }
 
