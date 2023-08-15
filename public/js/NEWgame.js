@@ -140,7 +140,7 @@ const keys = {
   d: { pressed: false },
 };
 
-const playerSpeed = 10;
+const playerSpeed = 3;
 let sequenceNumber = [];
 const playerInputs = [];
 
