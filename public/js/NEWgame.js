@@ -66,15 +66,13 @@ socket.on('updatePlayers', (backEndPlayers) => {
       imageIterator++;
       frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, selectedImage, 5);
       // Adding a player in playerscore
-      document.querySelector('#playerScore').innerHTML += `<div data-id='${id}'>${id}: ${backendPlayer.score}</div>`;
+      document.querySelector('#playerScore').innerHTML += `<div data-id='${id}'>Enemy: ${backendPlayer.score}</div>`
     } else {
-      document.querySelector(`div[data-id="${id}"]`).innerHTML = `${id}: ${backendPlayer.score}`;
-
+      
       if (id === socket.id) {
-        // if a player already exists
         frontEndPlayers[id].x = backendPlayer.x
         frontEndPlayers[id].y = backendPlayer.y
-
+        document.querySelector(`div[data-id="${id}"]`).innerHTML = `You: ${backendPlayer.score}`
         const lastBackEndInputIndex = playerInputs.findIndex(input => {
           return backendPlayer.sequenceNumber === input.sequenceNumber
         });
@@ -110,6 +108,21 @@ socket.on('updatePlayers', (backEndPlayers) => {
 });
 
 let animationId;
+
+socket.on('gameOver', (backEndPlayers)=> {
+  let playerArray = Object.keys(backEndPlayers)
+  if(playerArray[0] === socket.id) {
+      const win = document.createElement('div')
+      win.textContent = 'YOU WIN!';
+
+      document.getElementById('gameScore').appendChild(win);
+    }else {
+      const lose = document.createElement('div')
+      lose.textContent = 'YOU LOSE!';
+
+      document.getElementById('gameScore').appendChild(lose);
+    }
+})
 
 // let score = 0
 function animate() {
