@@ -111,18 +111,31 @@ let animationId;
 
 socket.on('gameOver', (backEndPlayers)=> {
   let playerArray = Object.keys(backEndPlayers)
-  if(playerArray[0] === socket.id) {
+  let id = playerArray[0];
+  console.log(backEndPlayers)
+  console.log(backEndPlayers[id].score)
+  if(id === socket.id) {
       const win = document.createElement('div')
       win.textContent = 'YOU WIN!';
 
       document.getElementById('gameScore').appendChild(win);
+      let score = backEndPlayers[id].score ;
+      const response = await fetch('/api/highscore', {
+        method: 'POST',
+        body: JSON.stringify({score}),
+        headers: { 'Content-Type': 'application/json'}
+      });
+      if(response.ok){
+        return;
+      }     
+      
     }else {
       const lose = document.createElement('div')
       lose.textContent = 'YOU LOSE!';
 
       document.getElementById('gameScore').appendChild(lose);
     }
-})
+});
 
 // let score = 0
 function animate() {
