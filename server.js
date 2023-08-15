@@ -64,8 +64,8 @@ io.on('connection', (socket) => {
     console.log('A user connected');
     // [socket.id] referencing a property
     backEndPlayers[socket.id] = {
-        x: 500 * Math.random(),
-        y: 500 * Math.random(),
+        x: 1200 * Math.random(),
+        y: 750 * Math.random(),
         sequenceNumber: 0,
         score: 0,
         lives: 5
