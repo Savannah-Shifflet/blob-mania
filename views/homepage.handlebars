@@ -1,18 +1,26 @@
-<div class="container justify-content-around">
-<a href="/gameplay"><button id="play-btn">Click to Play!</button></a>
-<div id="about-blobs">
-    <h2 class="text-center"><img class="gif" src = './sprites/green.gif'>  About the Blobs!  <img class="gif" src = './sprites/green.gif'></h2>
-    <p>Blob Mania is a multiplayer 2D shooter! Each player is given 5 lives. Shoot the other player while
-        dodging their attacks to win!</p>
-    <h3>How to Play:</h3>
-    <h4>Movement:</h4>
-    <ul>
-        <li>W - Move Up</li>
-        <li>A - Move Left</li>
-        <li>S - Move Down</li>
-        <li>D - Move Right</li>
-    </ul>
-    <h4>Attack:</h4>
-    <ul>M1 - Click on the Game Window to shoot a projectile</ul>
-</div>
+<div class="container">
+    <div class = 'row my-2 align-items-center'> 
+        {{#if loggedIn}}
+        <a href="/gameplay"><button class = "btn" id="play-btn">Click to Play!</button></a>
+        {{else}}
+        <a href="/profile"><button id="play-btn">Login to Play!</button></a>
+        {{/if}}
+    </div>
+    <div class = 'my-4 row align-items-center'>
+        <div id="about-blobs">
+            <h2 class="text-center"><img class="gif" src = './sprites/green.gif'>  About the Blobs!  <img class="gif" src = './sprites/green.gif'></h2>
+            <p>Blob Mania is a multiplayer 2D shooter! Each player is given 5 lives. Shoot the other player while
+                dodging their attacks to win!</p>
+            <h3>How to Play:</h3>
+            <h4>Movement:</h4>
+            <ul>
+                <li>W - Move Up</li>
+                <li>A - Move Left</li>
+                <li>S - Move Down</li>
+                <li>D - Move Right</li>
+            </ul>
+            <h4>Attack:</h4>
+            <ul>M1 - Click on the Game Window to shoot a projectile</ul>
+        </div>
+    </div>
 </div>

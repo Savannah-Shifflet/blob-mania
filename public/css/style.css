@@ -12,6 +12,10 @@ ul {
   font-family: 'VT323', monospace;
 }
 
+a:hover{
+  text-decoration: none;
+}
+
 .gamer-font {
   font-family: 'VT323', monospace;
 }
@@ -95,7 +99,8 @@ ul {
 
 #btnCreate,
 #btnJoin,
-#send-btn {
+#send-btn,
+#play-btn {
   transition: all .2s ease-in-out;
   display: flex;
   margin: auto auto;
@@ -203,29 +208,10 @@ ul {
   max-width: 800px;
 }
 
-#login-status,
-#play-btn {
-  border: 2px outset black;
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: all .2s ease-in-out;
-  display: flex;
-  margin: auto auto;
-  background-image: linear-gradient(to bottom right, #8756a4, #6c68af, #5975b9);
-  color: white;
-  font-family: 'VT323', monospace;
-  font-size: 32px;
-}
-
-#login-status {
-  display: none;
-}
 
 #about-blobs {
   margin: auto;
-  margin-top: 200px;
+  margin-top: 0.2rem;
   border: 0.2rem solid #fff;
   border-radius: 2rem;
   padding: 0.4em;
