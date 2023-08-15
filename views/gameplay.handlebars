@@ -8,11 +8,12 @@
     </div>
     <div>
         <canvas id="canvas1"></canvas>
-        <button id="play-btn">Play</button>
+        <button id="play-btn">Click to Play!</button>
         {{#if loggedIn}}
         <style>
-            #play-btn {
-                display: none
+            #play-btn,
+            #about-blobs {
+                display: none;
             }
         </style>
         {{else}}
@@ -24,15 +25,27 @@
             }
         </style>
         {{/if}}
+        <div id="about-blobs">
+            <h2 class="text-center">About the Blobs!</h2>
+            <p>Blob Mania is a multiplayer 2D shooter! Each player is given 5 lives. Shoot the other player while
+                dodging their attacks to win!</p>
+            <h3>How to Play:</h3>
+            <h4>Movement:</h4>
+            <ul>
+                <li>W - Move Up</li>
+                <li>A - Move Left</li>
+                <li>S - Move Down</li>
+                <li>D - Move Right</li>
+            </ul>
+            <h4>Attack:</h4>
+            <ul>M1 - Click on the Game Window to shoot a projectile</ul>
+        </div>
     </div>
 </div>
 
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.2/gsap.min.js"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.2/gsap.min.js"
     integrity="sha512-kVlGhj2qFy+KBCFuvjBJTGUMxbdqJKs4yK2jh0e0VPhWUPiPC87bzm4THmaaIee3Oj7j6sDpTTgm2EPPiESqBg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-></script>
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
 <script src="./js/classes/Player.js"></script>
 <script src="./js/classes/Particle.js"></script>

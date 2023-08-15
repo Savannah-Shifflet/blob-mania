@@ -3,7 +3,11 @@ body {
 }
 
 form,
-h4 {
+h2,
+h3,
+h4,
+p,
+ul {
   color: white;
   font-family: 'VT323', monospace;
 }
@@ -196,7 +200,7 @@ h4 {
 #play-btn {
   border: 2px outset black;
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: all .2s ease-in-out;
@@ -210,4 +214,24 @@ h4 {
 
 #login-status {
   display: none;
+}
+
+#about-blobs {
+  margin: auto;
+  margin-top: 200px;
+  border: 0.2rem solid #fff;
+  border-radius: 2rem;
+  padding: 0.4em;
+  box-shadow: 0 0 .2rem #fff,
+    0 0 .2rem #fff,
+    0 0 0.5rem #bc13fe,
+    0 0 0.8rem #bc13fe,
+    0 0 1.8rem #bc13fe,
+    inset 0 0 1rem #bc13fe;
+  max-width: 500px;
+}
+
+#about-blobs ul,
+p {
+  font-size: 20px;
 }
