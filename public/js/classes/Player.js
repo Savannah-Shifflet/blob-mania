@@ -5,6 +5,7 @@ class Player {
     this.radius = radius;
     this.image = new Image();
     this.image.src = imageSrc;
+    // this.lives = lives;
 
     if (this.image.complete) {
       this.loaded = true;
