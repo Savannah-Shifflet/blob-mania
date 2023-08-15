@@ -159,8 +159,10 @@ setInterval(() => {
                 backEndPlayers[playerId].lives--;
                 if (backEndPlayers[playerId].lives <= 0) {
                     delete backEndPlayers[playerId]
+                    if(Object.keys(backEndPlayers).length === 1){
+                        io.emit('gameOver', backEndPlayers); 
+                    }
                 }
-                // console.log(backEndPlayers[playerId]);
                 break;
             }
         }
