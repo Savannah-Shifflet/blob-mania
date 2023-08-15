@@ -43,13 +43,13 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
   };
   for (const frontEndProjectileId in frontEndProjectiles) {
     if (!backEndProjectiles[frontEndProjectileId]) {
-      delete frontEndProjectiles[frontEndProjectileId];
-    };
-  };
-});
+      delete frontEndProjectiles[frontEndProjectileId]
+    }
+  }
+})
+const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png', 'sprites/blob1a.png', 'sprites/blob2a.png', 'sprites/blob3a.png', 'sprites/blob4a.png'];
 
 let imageIterator = 0;
-
 // When user joins a game we loop through all backEndPlayers and if player doesn't exist
 socket.on('updatePlayers', (backEndPlayers) => {
   if (!backEndPlayers) {
@@ -61,7 +61,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
 
     if (!frontEndPlayers[id]) {
       // Randomizing a sprite color for each player
-      const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png'];
+    //   const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png'];
       const selectedImage = playerImageSrc[imageIterator];
       imageIterator++;
       frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, selectedImage, 5);
@@ -196,7 +196,8 @@ window.addEventListener("keydown", (event) => {
   switch (event.code) {
     case 'KeyW':
       keys.w.pressed = true;
-      break;
+    //   frontEndPlayers[socket.id].image.src = playerImageSrc[4];
+      break
 
     case 'KeyA':
       keys.a.pressed = true;
@@ -205,7 +206,8 @@ window.addEventListener("keydown", (event) => {
 
     case 'KeyS':
       keys.s.pressed = true;
-      break;
+    //   frontEndPlayers[socket.id].image.src = playerImageSrc[4];
+      break
 
     case 'KeyD':
       keys.d.pressed = true;
@@ -215,11 +217,12 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener('keyup', (event) => {
-  if (!frontEndPlayers[socket.id]) return
+  if (!frontEndPlayers[socket.id]) return;
 
   switch (event.code) {
     case 'KeyW':
       keys.w.pressed = false;
+    //   frontEndPlayers[socket.id].image.src = playerImageSrc[0];
       break;
 
     case 'KeyA':
@@ -230,6 +233,7 @@ window.addEventListener('keyup', (event) => {
 
     case 'KeyS':
       keys.s.pressed = false;
+    //   frontEndPlayers[socket.id].image.src = playerImageSrc[0];
       break;
 
     case 'KeyD':
@@ -237,5 +241,5 @@ window.addEventListener('keyup', (event) => {
       frontEndPlayers[socket.id].a = false;
       frontEndPlayers[socket.id].d = true;
       break;
-  };
+  }
 });
