@@ -49,9 +49,10 @@ router.get('/profile', async (req, res) => {
 
       const highScores = highscoreData.map((score) => score.get({ plain: true })); 
 
+      const totalScoreData = await HighScores.sum('score', {where: {user_id: req.session.user_id }});
+      console.log(totalScoreData);
 
-      console.log(highScores)
-      res.render('profile', { highScores, loggedIn: req.session.logged_in});    
+      res.render('profile', { highScores, totalScoreData, loggedIn: req.session.logged_in});    
   } catch (err) {
     res.status(500).json(err);
   }

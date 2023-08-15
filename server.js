@@ -57,15 +57,15 @@ const backEndProjectiles = {};
 // let backEndLives = 5;
 let projectileId = 0;
 const PROJECTILE_RADIUS = 5;
-const playerSpeed = 3;
+const playerSpeed = 8;
 const playerRadius = 10;
 
 io.on('connection', (socket) => {
     console.log('A user connected');
     // [socket.id] referencing a property
     backEndPlayers[socket.id] = {
-        x: 1200 * Math.random(),
-        y: 750 * Math.random(),
+        x: 800 * Math.random(),
+        y: 500 * Math.random(),
         sequenceNumber: 0,
         score: 0,
         lives: 5
@@ -139,13 +139,13 @@ io.on('connection', (socket) => {
 
         if (playerSides.left < 0) backEndPlayers[socket.id].x = backEndPlayer.radius
         
-        if (playerSides.right > 1200)
-            backEndPlayers[socket.id].x = 1200 - backEndPlayer.radius
+        if (playerSides.right > 800)
+            backEndPlayers[socket.id].x = 800 - backEndPlayer.radius
 
         if (playerSides.top < 0) backEndPlayers[socket.id].y = backEndPlayer.radius
         
-        if (playerSides.bottom > 750)
-            backEndPlayers[socket.id].y = 750 - backEndPlayer.radius
+        if (playerSides.bottom > 500)
+            backEndPlayers[socket.id].y = 500 - backEndPlayer.radius
     })
 });
 
