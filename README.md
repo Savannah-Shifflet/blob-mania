@@ -35,7 +35,7 @@ Introducing Blob Mania! The website game for you and your friends to endlessly c
 ### Link to Deployed Application
 ---
 
-[Form-Fixer](https://pingdrew.github.io/Form-Fixer/)
+[Blob Mania!](https://blob-mania-322037286e7b.herokuapp.com/)
 
 ### [Project Presentation](https://docs.google.com/presentation/d/1MgeRX8-y5eeQkPE-Jh3MESlMzUGDEyEQfw3xJX2T1JY/edit?usp=sharing)
 
