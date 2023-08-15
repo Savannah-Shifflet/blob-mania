@@ -61,7 +61,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
 
     if (!frontEndPlayers[id]) {
       // Randomizing a sprite color for each player
-    //   const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png'];
+      // const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png'];
       const selectedImage = playerImageSrc[imageIterator];
       imageIterator++;
       frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, selectedImage, 5);
@@ -109,7 +109,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
 
 let animationId;
 
-socket.on('gameOver', (backEndPlayers)=> {
+socket.on('gameOver', async (backEndPlayers) => {
   let playerArray = Object.keys(backEndPlayers)
   let id = playerArray[0];
   console.log(backEndPlayers)
