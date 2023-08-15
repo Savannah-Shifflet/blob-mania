@@ -16,6 +16,10 @@ ul {
   font-family: 'VT323', monospace;
 }
 
+.gif{
+  height: 30px;
+  width: 30px;
+}
 .neon-border {
   border: 0.2rem solid #fff;
   border-radius: 2rem;
