@@ -170,7 +170,11 @@ function animate() {
   // Loop through frontEndPlayers object
   for (const id in frontEndPlayers) {
     const frontEndPlayer = frontEndPlayers[id]
-    frontEndPlayer.draw()
+    if (socket.id === id) {
+      frontEndPlayer.draw('You');
+    } else {
+      frontEndPlayer.draw('Enemy');
+    }
   };
 
   for (const id in frontEndProjectiles) {
@@ -181,7 +185,7 @@ function animate() {
   // Flipping a sprite
   for (const id in frontEndPlayers) {
     const player = frontEndPlayers[id];
-    player.draw();
+    player.draw('');
   };
 };
 
