@@ -2,47 +2,48 @@ body {
   background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%);
 }
 
-form, h4{
-  color: white; 
+form,
+h4 {
+  color: white;
   font-family: 'VT323', monospace;
 }
 
-.neon-border{
+.neon-border {
   border: 0.2rem solid #fff;
   border-radius: 2rem;
   padding: 0.4em;
   box-shadow: 0 0 .2rem #fff,
-              0 0 .2rem #fff,
-              0 0 0.5rem #bc13fe,
-              0 0 0.8rem #bc13fe,
-              0 0 1.8rem #bc13fe,
-              inset 0 0 1rem #bc13fe; 
+    0 0 .2rem #fff,
+    0 0 0.5rem #bc13fe,
+    0 0 0.8rem #bc13fe,
+    0 0 1.8rem #bc13fe,
+    inset 0 0 1rem #bc13fe;
   color: white;
 }
 
-.add_player{
+.add_player {
   background-color: #8756a4;
   border: 0.02rem solid #fff;
   border-radius: 2rem;
   box-shadow: 0 0 .1rem #fff,
-              0 0 .2rem #fff,
-              0 0 0.3rem #bc13fe,
-              0 0 0.4rem #bc13fe,
-              0 0 0.6rem #bc13fe;
-              /* inset 0 0 rem #bc13fe;  */
+    0 0 .2rem #fff,
+    0 0 0.3rem #bc13fe,
+    0 0 0.4rem #bc13fe,
+    0 0 0.6rem #bc13fe;
+  /* inset 0 0 rem #bc13fe;  */
 }
 
-.login{
+.login {
   background-color: transparent;
   color: #6c68af;
   font-family: 'VT323', monospace;
   font-size: 20px;
 }
 
-.login:hover{
+.login:hover {
   text-decoration: none;
-  color:white; 
-  text-shadow: 
+  color: white;
+  text-shadow:
     0 0 2px #fff,
     0 0 4px #fff,
     0 0 5px #0fa,
@@ -54,17 +55,17 @@ form, h4{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('/background1.png');
+  background-image: url('/public/sprites/background1.png');
   width: 1200px;
   height: 750px;
   border: 0.2rem solid #fff;
   border-radius: 2rem;
   box-shadow: 0 0 .2rem #fff,
-              0 0 .2rem #fff,
-              0 0 0.5rem #bc13fe,
-              0 0 0.8rem #bc13fe,
-              0 0 1.8rem #bc13fe,
-              inset 0 0 1rem #bc13fe; 
+    0 0 .2rem #fff,
+    0 0 0.5rem #bc13fe,
+    0 0 0.8rem #bc13fe,
+    0 0 1.8rem #bc13fe,
+    inset 0 0 1rem #bc13fe;
 }
 
 
@@ -84,90 +85,98 @@ form, h4{
 
 #btnCreate,
 #btnJoin,
-#send-btn{
-    transition: all .2s ease-in-out; 
-    display: flex;
-    margin: auto auto;
-    background-image: linear-gradient(to bottom right, #8756a4,#6c68af, #5975b9);
-    color: white;
-    font-family: 'VT323', monospace;
-    font-size: 32px;
+#send-btn {
+  transition: all .2s ease-in-out;
+  display: flex;
+  margin: auto auto;
+  background-image: linear-gradient(to bottom right, #8756a4, #6c68af, #5975b9);
+  color: white;
+  font-family: 'VT323', monospace;
+  font-size: 32px;
 }
 
 #messages,
-#newGameEl p{
+#newGameEl p {
   max-height: 200px;
-  color:white; 
-  margin-top: 10px; 
+  color: white;
+  margin-top: 10px;
 }
 
-#btnCreate:hover, 
+#btnCreate:hover,
 #btnJoin:hover,
-#play-btn:hover{
+#play-btn:hover {
   border: 0.2rem solid #fff;
   border-radius: 2rem;
   box-shadow: 0 0 .2rem #fff,
-              0 0 .2rem #fff,
-              0 0 0.5rem #bc13fe,
-              0 0 0.8rem #bc13fe,
-              0 0 1.8rem #bc13fe,
-              inset 0 0 1rem #bc13fe; 
+    0 0 .2rem #fff,
+    0 0 0.5rem #bc13fe,
+    0 0 0.8rem #bc13fe,
+    0 0 1.8rem #bc13fe,
+    inset 0 0 1rem #bc13fe;
 }
 
-#txtGameId{
-    background-color: transparent;
-    border: #6c68af solid 1px;
-    border-radius: 0.2rem;
-    color: white;
-    height: 40px;
+#txtGameId {
+  background-color: transparent;
+  border: #6c68af solid 1px;
+  border-radius: 0.2rem;
+  color: white;
+  height: 40px;
 
 }
 
 
-#join_players{
+#join_players {
   font-family: 'VT323', monospace;
   color: white;
 }
 
 #neon-text {
-    font-size: 72px;
-    font-family: 'Tilt Neon', cursive;
-    animation: flicker 1.5s infinite alternate;   
-    color: #fff;
-    text-shadow:
-        0 0 7px #fff,
-        0 0 10px #fff,
-        0 0 21px #fff,
-        0 0 42px #0fa,
-        0 0 82px #0fa,
-        0 0 92px #0fa,
-        0 0 102px #0fa,
-        0 0 151px #0fa;  
+  font-size: 72px;
+  font-family: 'Tilt Neon', cursive;
+  animation: flicker 1.5s infinite alternate;
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #0fa,
+    0 0 82px #0fa,
+    0 0 92px #0fa,
+    0 0 102px #0fa,
+    0 0 151px #0fa;
 }
 
-#neon-text:hover{
+#neon-text:hover {
   text-decoration: none;
 }
 
 @keyframes flicker {
-    
-    0%, 18%, 22%, 25%, 53%, 57%, 100% {
 
-        text-shadow:
-        0 0 4px #fff,
-        0 0 11px #fff,
-        0 0 19px #fff,
-        0 0 40px #0fa,
-        0 0 80px #0fa,
-        0 0 90px #0fa,
-        0 0 100px #0fa,
-        0 0 150px #0fa;
-    
-    }
-    
-    20%, 24%, 55% {        
-        text-shadow: none;
-    }    
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+
+    text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #0fa,
+      0 0 80px #0fa,
+      0 0 90px #0fa,
+      0 0 100px #0fa,
+      0 0 150px #0fa;
+
+  }
+
+  20%,
+  24%,
+  55% {
+    text-shadow: none;
+  }
 }
 
 #chat-box {
@@ -176,11 +185,11 @@ form, h4{
   border-radius: 2rem;
   padding: 0.4em;
   box-shadow: 0 0 .2rem #fff,
-              0 0 .2rem #fff,
-              0 0 0.5rem #bc13fe,
-              0 0 0.8rem #bc13fe,
-              0 0 1.8rem #bc13fe,
-              inset 0 0 1rem #bc13fe; 
+    0 0 .2rem #fff,
+    0 0 0.5rem #bc13fe,
+    0 0 0.8rem #bc13fe,
+    0 0 1.8rem #bc13fe,
+    inset 0 0 1rem #bc13fe;
   max-width: 800px;
 }
 
@@ -191,15 +200,15 @@ form, h4{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: all .2s ease-in-out; 
+  transition: all .2s ease-in-out;
   display: flex;
   margin: auto auto;
-  background-image: linear-gradient(to bottom right, #8756a4,#6c68af, #5975b9);
+  background-image: linear-gradient(to bottom right, #8756a4, #6c68af, #5975b9);
   color: white;
   font-family: 'VT323', monospace;
   font-size: 32px;
 }
 
-  #login-status {
-    display: none;
-  }
+#login-status {
+  display: none;
+}

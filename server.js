@@ -42,7 +42,7 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'assets')));
+// app.use(express.static(path.join(__dirname, 'assets')));
 
 app.use(routes);
 
@@ -139,7 +139,7 @@ setInterval(() => {
             backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.width ||
             backEndProjectiles[id].x + PROJECTILE_RADIUS <= 0 ||
             backEndProjectiles[id].y - PROJECTILE_RADIUS >=
-            backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.width ||
+            backEndPlayers[backEndProjectiles[id].playerId]?.canvas?.height ||
             backEndProjectiles[id].y + PROJECTILE_RADIUS <= 0
         ) {
             delete backEndProjectiles[id]
