@@ -11,7 +11,10 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const server = http.createServer(app);
 const { Server } = require('socket.io')
-const io = new Server(server, { pingInterval: 2000, pingTimeout: 5000 })
+const io = new Server(server, { pingInterval: 2000, pingTimeout: 5000, 
+    cors: {
+        origin: 'https://blob-mania-322037286e7b.herokuapp.com/'
+    } });
 
 const PORT = process.env.PORT || 3001;
 const sess = {
@@ -54,7 +57,7 @@ const backEndProjectiles = {};
 let backEndLives = 5;
 let projectileId = 0;
 const PROJECTILE_RADIUS = 5;
-const playerSpeed = 10;
+const playerSpeed = 3;
 const playerRadius = 10;
 
 io.on('connection', (socket) => {
@@ -63,7 +66,8 @@ io.on('connection', (socket) => {
     backEndPlayers[socket.id] = {
         x: 500 * Math.random(),
         y: 500 * Math.random(),
-        sequenceNumber: 0
+        sequenceNumber: 0,
+        score: 0
     }
 
     io.emit('updatePlayers', backEndPlayers)
@@ -152,6 +156,8 @@ setInterval(() => {
                 backEndProjectiles[id].y - backEndPlayer.y
             )
             if (DISTANCE < PROJECTILE_RADIUS + backEndPlayer.radius && backEndProjectiles[id].playerId !== playerId) {
+                // A player who shot a projectile
+                backEndPlayers[backEndProjectiles[id].playerId].score++
                 delete backEndProjectiles[id]
                 if (backEndLives <= 0) {
                     delete backEndPlayers[playerId]

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, HighScore } = require('../models');
+const { User, HighScores } = require('../models');
 
 router.get('/', async (req, res) => {
   try { 
@@ -39,7 +39,7 @@ router.get('/profile', async (req, res) => {
       res.redirect('/login');
       return;
     }
-      const highscoreData = await HighScore.findAll({order: [['score', 'DESC']], where: {user_id: req.session.user_id }});
+      const highscoreData = await HighScores.findAll({order: [['score', 'DESC']], where: {user_id: req.session.user_id }});
       console.log(highscoreData);
 
       const highScores = highscoreData.map((score) => score.get({ plain: true })); 

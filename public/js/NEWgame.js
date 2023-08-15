@@ -46,9 +46,7 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
   }
 })
 
-// When user joins a game we loop through all backEndPlayers and if player doesn't exist
-const player = new Player(x, y, 40)
-const playerImageSrc = './blob1.png';
+// const player = new Player(x, y, 40)
 
 // When user joins a game we loop through all backendplayers and if player doesn't exist
 socket.on('updatePlayers', (backendPlayers) => {
@@ -56,8 +54,17 @@ socket.on('updatePlayers', (backendPlayers) => {
     const backendPlayer = backendPlayers [id]
 
     if (!frontEndPlayers[id]) {
-      frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, playerImageSrc)
+        // Randomizing a sprite color for each player
+        const playerImageSrc = ['./blob1.png', './blob2.png', './blob3.png', './blob4.png'];
+        const randomImage = Math.floor(Math.random() * playerImageSrc.length);
+        const selectedImage = playerImageSrc[randomImage];
+
+      frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, selectedImage)
+    // Adding a player in playerscore
+      document.querySelector('#playerScore').innerHTML += `<div data-id='${id}'>${id}: ${backendPlayer.score}</div>`
     } else {
+        document.querySelector(`div[data-id="${id}"]`).innerHTML = `${id}: ${backendPlayer.score}`
+
       if (id === socket.id) {
         // if a player already exists
         frontEndPlayers[id].x = backendPlayer.x
@@ -89,6 +96,9 @@ socket.on('updatePlayers', (backendPlayers) => {
   // Deleting a player from frontend
   for (const id in frontEndPlayers) {
     if (!backendPlayers[id]) {
+
+      const deleteDiv = document.querySelector(`div[data-id="${id}"]`)
+      deleteDiv.parentNode.removeChild(deleteDiv)
       delete frontEndPlayers[id]
     }
   }
@@ -98,8 +108,8 @@ let animationId
 // let score = 0
 function animate() {
   animationId = requestAnimationFrame(animate)
-  c.fillStyle = 'rgba(0, 0, 0, 0.1)'
-  c.fillRect(0, 0, canvas.width, canvas.height)
+//   c.fillStyle = 'rgba(0, 0, 0, 0.1)'
+  c.clearRect(0, 0, canvas.width, canvas.height)
   // Loop through frontEndPlayers object
   for (const id in frontEndPlayers) {
     const frontEndPlayer = frontEndPlayers[id]
@@ -130,7 +140,7 @@ const keys = {
   d: { pressed: false },
 };
 
-const playerSpeed = 10;
+const playerSpeed = 3;
 let sequenceNumber = [];
 const playerInputs = [];
 
