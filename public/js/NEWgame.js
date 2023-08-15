@@ -48,24 +48,27 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
   }
 })
 
-// const player = new Player(x, y, 40)
+let imageIterator = 0;
 
-// When user joins a game we loop through all backendplayers and if player doesn't exist
-socket.on('updatePlayers', (backendPlayers) => {
-  for (const id in backendPlayers) {
-    const backendPlayer = backendPlayers [id]
+// When user joins a game we loop through all backEndPlayers and if player doesn't exist
+socket.on('updatePlayers', (backEndPlayers) => {
+  if (!backEndPlayers) {
+    imageIterator = 0;
+  }
+
+  for (const id in backEndPlayers) {
+    const backendPlayer = backEndPlayers[id]
 
     if (!frontEndPlayers[id]) {
-        // Randomizing a sprite color for each player
-        const playerImageSrc = ['./blob1.png', './blob2.png', './blob3.png', './blob4.png'];
-        const randomImage = Math.floor(Math.random() * playerImageSrc.length);
-        const selectedImage = playerImageSrc[randomImage];
-
+      // Randomizing a sprite color for each player
+      const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png'];
+      const selectedImage = playerImageSrc[imageIterator];
+      imageIterator++;
       frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, selectedImage, 5)
-    // Adding a player in playerscore
+      // Adding a player in playerscore
       document.querySelector('#playerScore').innerHTML += `<div data-id='${id}'>${id}: ${backendPlayer.score}</div>`
     } else {
-        document.querySelector(`div[data-id="${id}"]`).innerHTML = `${id}: ${backendPlayer.score}`
+      document.querySelector(`div[data-id="${id}"]`).innerHTML = `${id}: ${backendPlayer.score}`
 
       if (id === socket.id) {
         // if a player already exists
@@ -97,7 +100,7 @@ socket.on('updatePlayers', (backendPlayers) => {
   }
   // Deleting a player from frontend
   for (const id in frontEndPlayers) {
-    if (!backendPlayers[id]) {
+    if (!backEndPlayers[id]) {
 
       const deleteDiv = document.querySelector(`div[data-id="${id}"]`)
       deleteDiv.parentNode.removeChild(deleteDiv)
@@ -110,7 +113,7 @@ let animationId
 // let score = 0
 function animate() {
   animationId = requestAnimationFrame(animate)
-//   c.fillStyle = 'rgba(0, 0, 0, 0.1)'
+  //   c.fillStyle = 'rgba(0, 0, 0, 0.1)'
   c.clearRect(0, 0, canvas.width, canvas.height)
   // Loop through frontEndPlayers object
   for (const id in frontEndPlayers) {
