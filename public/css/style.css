@@ -69,9 +69,8 @@ a:hover{
 
 #canvas1 {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(#c14d9d, #7e5ba6, #5779bc, #48b5c2);  
+  background: linear-gradient(#c14d9d, #7e5ba6, #5779bc, #48b5c2);
+  margin: auto;  
   width: 800px;
   height: 500px;
   border: 0.2rem solid #fff;
