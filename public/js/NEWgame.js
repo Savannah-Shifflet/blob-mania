@@ -70,10 +70,10 @@ socket.on('updateProjectiles', (backEndProjectiles) => {
   }
 })
 
-const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png', 'sprites/blob1a.png', 'sprites/blob2a.png', 'sprites/blob3a.png', 'sprites/blob4a.png'];
+const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png'];
 
 let imageIterator = 0;
-// When user joins a game we loop through all backEndPlayers and if player doesn't exist
+
 socket.on('updatePlayers', (backEndPlayers) => {
   if (!backEndPlayers) {
     imageIterator = 0;
@@ -84,7 +84,6 @@ socket.on('updatePlayers', (backEndPlayers) => {
 
     if (!frontEndPlayers[id]) {
       // Randomizing a sprite color for each player
-      // const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png'];
       const selectedImage = playerImageSrc[imageIterator];
       imageIterator++;
       frontEndPlayers[id] = new Player(backendPlayer.x, backendPlayer.y, 40, selectedImage, 5);
@@ -142,6 +141,10 @@ socket.on('gameOver', async (backEndPlayers) => {
       win.setAttribute('id', "neon-text")
       win.setAttribute('style', "position: absolute; top: 40%; left: 33%; padding:4rem; background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%); border-radius: 2rem");
       document.getElementById('gameOver').appendChild(win);
+
+      const victorySound = new Audio('/sprites/win.mp3');
+      victorySound.play();
+
       let score = backEndPlayers[id].score ;
       const response = await fetch('/api/highscore', {
         method: 'POST',
@@ -159,6 +162,10 @@ socket.on('gameOver', async (backEndPlayers) => {
       lose.setAttribute('style', "position: absolute; top: 40%; left: 33%; padding:4rem; background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%); border-radius: 2rem");
 
       document.getElementById('gameOver').appendChild(lose);
+
+      const loseSound = new Audio('/sprites/lose.mp3');
+      loseSound.volume = 0.5;
+      loseSound.play();
     }
 });
 
