@@ -88,6 +88,7 @@ a:hover{
   user-select: none;
 }
 
+#play-btn,
 .neon-btn {
   transition: all .2s ease-in-out;
   display: flex;
