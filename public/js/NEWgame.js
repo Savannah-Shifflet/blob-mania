@@ -142,8 +142,9 @@ socket.on('gameOver', async (backEndPlayers) => {
   if(id === socket.id) {
       const win = document.createElement('div')
       win.textContent = 'YOU WIN!';
-
-      document.getElementById('gameScore').appendChild(win);
+      win.setAttribute('id', "neon-text")
+      win.setAttribute('style', "position: absolute; top: 40%; left: 33%; padding:4rem; background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%); border-radius: 2rem");
+      document.getElementById('gameOver').appendChild(win);
       let score = backEndPlayers[id].score ;
       const response = await fetch('/api/highscore', {
         method: 'POST',
@@ -157,8 +158,10 @@ socket.on('gameOver', async (backEndPlayers) => {
     }else {
       const lose = document.createElement('div')
       lose.textContent = 'YOU LOSE!';
+      lose.setAttribute('id', "neon-text");
+      lose.setAttribute('style', "position: absolute; top: 40%; left: 33%; padding:4rem; background-image: radial-gradient(#2f0169 0%, #14062f 65%, #070a1a 80%); border-radius: 2rem");
 
-      document.getElementById('gameScore').appendChild(lose);
+      document.getElementById('gameOver').appendChild(lose);
     }
 });
 
