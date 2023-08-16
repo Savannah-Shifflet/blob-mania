@@ -6,8 +6,6 @@ const socket = io();
 const scoreEl = document.querySelector('#scoreEl');
 const devicePixelRatio = 1;
 
-// canvas.width = innerWidth * devicePixelRatio;
-// canvas.height = innerHeight * devicePixelRatio;
 canvas.width = 800;
 canvas.height = 500;
 console.log(window.devicePixelRatio);
@@ -42,7 +40,7 @@ button.addEventListener('click', function() {
 
 music.play();
 
-
+// connection
 socket.on('connect', () => {
   socket.emit('initCanvas', { width: canvas.width, height: canvas.height, devicePixelRatio });
 });
@@ -110,7 +108,6 @@ socket.on('updatePlayers', (backEndPlayers) => {
           frontEndPlayers[id].y += input.dy
         });
       } else {
-        // for all other frontEndPlayers
         // interpolation for lag so player does not teleport due to lag
         gsap.to(frontEndPlayers[id], {
           x: backendPlayer.x,
@@ -162,10 +159,8 @@ socket.on('gameOver', async (backEndPlayers) => {
     }
 });
 
-// let score = 0
 function animate() {
   animationId = requestAnimationFrame(animate)
-  //   c.fillStyle = 'rgba(0, 0, 0, 0.1)'
   c.clearRect(0, 0, canvas.width, canvas.height)
   // Loop through frontEndPlayers object
   for (const id in frontEndPlayers) {
@@ -198,6 +193,7 @@ const keys = {
   d: { pressed: false },
 };
 
+// Movement
 const playerSpeed = 3;
 let sequenceNumber = [];
 const playerInputs = [];
@@ -238,7 +234,6 @@ window.addEventListener("keydown", (event) => {
   switch (event.code) {
     case 'KeyW':
       keys.w.pressed = true;
-    //   frontEndPlayers[socket.id].image.src = playerImageSrc[4];
       break
 
     case 'KeyA':
@@ -248,7 +243,6 @@ window.addEventListener("keydown", (event) => {
 
     case 'KeyS':
       keys.s.pressed = true;
-    //   frontEndPlayers[socket.id].image.src = playerImageSrc[4];
       break
 
     case 'KeyD':
@@ -264,7 +258,6 @@ window.addEventListener('keyup', (event) => {
   switch (event.code) {
     case 'KeyW':
       keys.w.pressed = false;
-    //   frontEndPlayers[socket.id].image.src = playerImageSrc[0];
       break;
 
     case 'KeyA':
@@ -275,7 +268,6 @@ window.addEventListener('keyup', (event) => {
 
     case 'KeyS':
       keys.s.pressed = false;
-    //   frontEndPlayers[socket.id].image.src = playerImageSrc[0];
       break;
 
     case 'KeyD':
