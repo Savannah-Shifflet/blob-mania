@@ -18,8 +18,8 @@ constructor({x, y, radius, color = 'white', velocity}) {
 
   update() {
     this.draw()
-    this.x = this.x + this.velocity.x
-    this.y = this.y + this.velocity.y
+    this.x = this.x + this.velocity.x * 2
+    this.y = this.y + this.velocity.y * 2
   }
 
   playSound(volume = 1) {
