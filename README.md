@@ -34,6 +34,10 @@ Technologies used for this application include:
   - [MySQL2](https://www.npmjs.com/package/mysql2)
   - [dotenv](https://www.npmjs.com/package/dotenv)
   - [Express](https://www.npmjs.com/package/express)
+ 
+  Database schema:
+  ![image](https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/ee2c7902-e5a1-4301-a7e5-0fc592f4848e)
+
 
 ### Installation 
 
