@@ -99,6 +99,7 @@ a:hover{
   font-size: 32px;
 }
 
+#play-btn:hover,
 .neon-btn:hover {
   border: 0.2rem solid #fff;
   border-radius: 2rem;

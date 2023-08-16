@@ -8,7 +8,6 @@ const devicePixelRatio = 1;
 
 canvas.width = 800;
 canvas.height = 500;
-console.log(window.devicePixelRatio);
 
 c.scale(devicePixelRatio, devicePixelRatio);
 
@@ -141,8 +140,6 @@ let animationId;
 socket.on('gameOver', async (backEndPlayers) => {
   let playerArray = Object.keys(backEndPlayers)
   let id = playerArray[0];
-  console.log(backEndPlayers)
-  console.log(backEndPlayers[id].score)
   if(id === socket.id) {
       const win = document.createElement('div')
       win.textContent = 'YOU WIN!';

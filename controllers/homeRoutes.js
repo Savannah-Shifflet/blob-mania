@@ -26,7 +26,6 @@ router.get('/login', async (req, res) => {
     }
     res.render('login', { loggedIn: req.session.logged_in} );
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
     }
 });
@@ -39,12 +38,10 @@ router.get('/profile', async (req, res) => {
       return;
     }
       const highscoreData = await HighScores.findAll({order: [['score', 'DESC']], where: {user_id: req.session.user_id }});
-      console.log(highscoreData);
 
       const highScores = highscoreData.map((score) => score.get({ plain: true })); 
 
       const totalScoreData = await HighScores.sum('score', {where: {user_id: req.session.user_id }});
-      console.log(totalScoreData);
 
       res.render('profile', { highScores, totalScoreData, loggedIn: req.session.logged_in});    
   } catch (err) {

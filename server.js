@@ -48,6 +48,7 @@ sequelize.sync({ force: false }).then(() => {
     server.listen(PORT, () => console.log(`Now listening on ${PORT}`));
 });
 
+// Socket.io server-side connection
 const backEndPlayers = {};
 const backEndProjectiles = {};
 
