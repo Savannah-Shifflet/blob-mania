@@ -25,8 +25,8 @@ Introducing Blob Mania! The website game for you and your friends to endlessly c
 
 ### Screenshot
 ---
+![BlobManiaScreenshot](https://github.com/Savannah-Shifflet/blob-mania/assets/136511402/29eb7f3c-cab3-482f-afaf-909f4c5bb59f)
 
-![FormFixerScrot](./assets/images/FormFixerScrot.gif)
 
 ### [Educational youtube video](https://www.youtube.com/watch?v=HXquxWtE5vA&list=PLpPnRKq7eNW16Wq1GQjQjpTo_E0taH0La&index=13)
 ---
