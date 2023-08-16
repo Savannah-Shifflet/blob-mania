@@ -4,7 +4,6 @@ const http = require('http');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
-const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -34,7 +33,7 @@ const sess = {
 
 app.use(session(sess));
 
-const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create();
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -42,7 +41,6 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(express.static(path.join(__dirname, 'assets')));
 
 app.use(routes);
 
@@ -50,11 +48,9 @@ sequelize.sync({ force: false }).then(() => {
     server.listen(PORT, () => console.log(`Now listening on ${PORT}`));
 });
 
-// app.use(session(sess));
 const backEndPlayers = {};
 const backEndProjectiles = {};
 
-// let backEndLives = 5;
 let projectileId = 0;
 const PROJECTILE_RADIUS = 5;
 const playerSpeed = 8;
@@ -106,7 +102,6 @@ io.on('connection', (socket) => {
         io.emit('updatePlayers')
     })
 
-    // console.log(backEndPlayers)
 
     socket.on('keydown', ({ keycode, sequenceNumber }) => {
         const backEndPlayer = backEndPlayers[socket.id]
