@@ -1,15 +1,15 @@
-# blob-mania, Project-2-Group-6
+# <img src="https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/4d8610cf-16cc-4ce5-ab28-cd5952981a0c" width = "40" height = "40"> &nbsp; blob-mania, Project-2-Group-6      
 ![MIT License badge](https://img.shields.io/github/license/savannah-shifflet/blob-mania)
-### Contributors: Andrew Wilson, Alina Badillo, Savannah Shifflet, Jared Brymer
+### Contributors: Andrew Wilson, Alina Badillo, Savannah Shifflet, Jared Brymer &nbsp;    <img src="https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/d4ab83d8-b15f-4909-b0d7-66728fc32d33" width = "30" height = "30">
 
 ---
-### Description
+### Description &nbsp; <img src="https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/f49afde2-fc60-42e2-bc3d-257f1ee295ae" width = "30" height = "30">
 ---
 Introducing Blob Mania! The website game for you and your friends to endlessly challenge and compete against each other, with score tracking so you can talk the most trash when you have the most score! Enjoy our art style championed by Alina, our functional game code worked on by all of us, and our login system, securely saving your password. We love games, and we all gained some great experience dealing with the many problems that arise when trying to make a multiplayer browser game. We embraced the challenge and taught ourselves a lot. Go team!
 
 [Project Presentation](https://docs.google.com/presentation/d/1MgeRX8-y5eeQkPE-Jh3MESlMzUGDEyEQfw3xJX2T1JY/edit?usp=sharing)
 
-### Table of Contents
+### Table of Contents &nbsp; <img src="https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/4d8610cf-16cc-4ce5-ab28-cd5952981a0c" width = "30" height = "30">
 ---
 - [Technologies](#technologies)
 - [Installation](#installation)
@@ -17,7 +17,7 @@ Introducing Blob Mania! The website game for you and your friends to endlessly c
 - [Credits](#credits)
 - [License](#license)
 
-### Technologies
+### Technologies &nbsp;    <img src="https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/d4ab83d8-b15f-4909-b0d7-66728fc32d33" width = "30" height = "30">
 ---
 Technologies used for this application include: 
 - Languages: CSS, HTML, JavaScript
@@ -39,8 +39,8 @@ Technologies used for this application include:
   ![image](https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/ee2c7902-e5a1-4301-a7e5-0fc592f4848e)
 
 
-### Installation 
-
+### Installation &nbsp; <img src="https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/f49afde2-fc60-42e2-bc3d-257f1ee295ae" width = "30" height = "30">
+---
 If you'd like to download the code, clone it to your local machine using: 
 
     git clone git@github.com:Savannah-Shifflet/e-commerce-back-end.git
@@ -49,7 +49,7 @@ Additionally, this code uses node.js packages which can be installed by running 
     
     npm install 
 
-### Usage
+### Usage &nbsp; <img src="https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/4d8610cf-16cc-4ce5-ab28-cd5952981a0c" width = "30" height = "30">
 ---
 You can play the game at the deployed link [here](https://blob-mania-322037286e7b.herokuapp.com/)! 
 
@@ -70,14 +70,14 @@ You can play the game at the deployed link [here](https://blob-mania-322037286e7
 - Responsive website layout
 
 
-### Credits
+### Credits &nbsp;    <img src="https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/d4ab83d8-b15f-4909-b0d7-66728fc32d33" width = "30" height = "30">
 ---
 We used this tutorial to learn about multiplayer game play and Socket.io:
 
 [Educational youtube video](https://www.youtube.com/watch?v=HXquxWtE5vA&list=PLpPnRKq7eNW16Wq1GQjQjpTo_E0taH0La&index=13)
 
 
-### License
+### License &nbsp; <img src="https://github.com/Savannah-Shifflet/blob-mania/assets/106942356/f49afde2-fc60-42e2-bc3d-257f1ee295ae" width = "30" height = "30">
 ---
 This application is covered under the MIT License. 
 
