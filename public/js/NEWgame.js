@@ -171,9 +171,9 @@ socket.on('gameOver', async (backEndPlayers) => {
 
       document.getElementById('gameOver').appendChild(lose);
 
-    //   const loseSound = new Audio('/sprites/lose.mp3');
-    //   loseSound.volume = 0.5;
-    //   loseSound.play();
+      const loseSound = new Audio('/sprites/lose.mp3');
+      loseSound.volume = 0.5;
+      loseSound.play();
     }
 });
 
