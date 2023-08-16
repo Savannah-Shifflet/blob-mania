@@ -45,30 +45,38 @@ socket.on('connect', () => {
   socket.emit('initCanvas', { width: canvas.width, height: canvas.height, devicePixelRatio });
 });
 
+const projectileImageSrc = ['sprites/blob-ball1.png', 'sprites/blob-ball2.png', 'sprites/blob-ball3.png', 'sprites/blob-ball4.png'];
+
 socket.on('updateProjectiles', (backEndProjectiles) => {
+
   for (const id in backEndProjectiles) {
     const backEndProjectile = backEndProjectiles[id];
 
     if (!frontEndProjectiles[id]) {
+      const randomProjectileImage = Math.floor(Math.random() * projectileImageSrc.length);
+      const selectedProjectile = projectileImageSrc[randomProjectileImage];
+
       frontEndProjectiles[id] = new Projectile({
         x: backEndProjectile.x,
         y: backEndProjectile.y,
         radius: 5,
         color: frontEndPlayers[backEndProjectile.playerId]?.color,
         velocity: backEndProjectile.velocity,
+        image: selectedProjectile
       });
       frontEndProjectiles[id].playSound(0.2);
     } else {
       frontEndProjectiles[id].x += backEndProjectiles[id].velocity.x;
       frontEndProjectiles[id].y += backEndProjectiles[id].velocity.y;
-    };
-  };
-  for (const frontEndProjectileId in frontEndProjectiles) {
-    if (!backEndProjectiles[frontEndProjectileId]) {
-      delete frontEndProjectiles[frontEndProjectileId]
     }
   }
-})
+
+  for (const frontEndProjectileId in frontEndProjectiles) {
+    if (!backEndProjectiles[frontEndProjectileId]) {
+      delete frontEndProjectiles[frontEndProjectileId];
+    }
+  }
+});
 
 const playerImageSrc = ['sprites/blob1.png', 'sprites/blob2.png', 'sprites/blob3.png', 'sprites/blob4.png'];
 
@@ -163,9 +171,9 @@ socket.on('gameOver', async (backEndPlayers) => {
 
       document.getElementById('gameOver').appendChild(lose);
 
-      const loseSound = new Audio('/sprites/lose.mp3');
-      loseSound.volume = 0.5;
-      loseSound.play();
+    //   const loseSound = new Audio('/sprites/lose.mp3');
+    //   loseSound.volume = 0.5;
+    //   loseSound.play();
     }
 });
 
